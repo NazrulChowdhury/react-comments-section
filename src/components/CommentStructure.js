@@ -24,16 +24,19 @@ const CommentStructure = ({ i, reply, parentId }) => {
         className={styles.userInfo}
         style={reply && { marginLeft: 15, marginTop: '6px' }}
       >
-        <div>{i.text}</div>
+        {/* avatar/Name/Buttons flex-row */}
         <div className={styles.commentsTwo}>
+           {/* avatar */}
           <div>
             <img
               src={i.avatarUrl}
               style={{ width: 24, height: 24, borderRadius: 24 / 2 }}
               alt='userIcon'
             />
-          </div>
+          </div> 
+            {/* fullName */}
           <div className={styles.fullName}>{i.fullName} </div>
+            {/* buttons */}
           <div>
             <button
               className={styles.replyBtn}
@@ -53,6 +56,8 @@ const CommentStructure = ({ i, reply, parentId }) => {
             </button>
           </div>
         </div>
+        {/* comment */}
+        <div>{i.text}</div>
       </div>
       <div className={styles.userActions}>
         {actions.userId === i.userId && actions.user && (
