@@ -9,6 +9,7 @@ export const ActionProvider = ({
   comments,
   signinUrl,
   signupUrl,
+  signInFunc,
   customInput
 }) => {
   const [replies, setReplies] = useState([])
@@ -24,6 +25,10 @@ export const ActionProvider = ({
   })
 
   const handleAction = (id, edit) => {
+    if(!user){
+      signInFunc()
+      return
+    }
     edit ? setEdit([...editArr, id]) : setReplies([...replies, id])
   }
   const handleCancel = (id, edit) => {

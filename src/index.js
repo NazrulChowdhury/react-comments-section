@@ -11,6 +11,7 @@ export const CommentSection = ({
   setComment,
   signinUrl,
   signupUrl,
+  signInFunc,
   customInput
 }) => {
   const [comments, setComments] = useState(commentsArray)
@@ -25,6 +26,7 @@ export const CommentSection = ({
       comments={comments}
       signinUrl={signinUrl}
       signupUrl={signupUrl}
+      signInFunc = {signInFunc}
       customInput={customInput}
     >
       <div className={styles.section}>
