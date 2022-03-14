@@ -24,7 +24,8 @@ const CommentStructure = ({ i, reply, parentId }) => {
         className={styles.userInfo}
         style={reply && { marginLeft: 15, marginTop: '6px' }}
       >
-        {/* avatar/Name/Buttons flex-row */}
+        <div>{i.text}</div>
+        {/* avatar/Name/Button flex-row */}
         <div className={styles.commentsTwo}>
            {/* avatar */}
           <div>
@@ -46,18 +47,8 @@ const CommentStructure = ({ i, reply, parentId }) => {
               {' '}
               <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply
             </button>
-            <button
-              className={styles.replyBtn}
-              onClick={() => actions.handleAction(i.comId)}
-              disabled={!actions.user}
-            >
-              {' '}
-              <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> like
-            </button>
           </div>
         </div>
-        {/* comment */}
-        <div>{i.text}</div>
       </div>
       <div className={styles.userActions}>
         {actions.userId === i.userId && actions.user && (
