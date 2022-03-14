@@ -42,7 +42,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
             <button
               className={styles.replyBtn}
               onClick={() => actions.handleAction(i.comId)}
-              disabled={!actions.user}
+              // disabled={!actions.user}
             >
               {' '}
               <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply
