@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import styles from '../Style.scss'
 import Popup from 'reactjs-popup'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import { BsReply } from "react-icons/bs"
+import { BiEdit } from "react-icons/bi"
 import { AiOutlineHeart } from "react-icons/ai"
 import {
   modal,
@@ -51,7 +52,8 @@ const CommentStructure = ({ i, reply, parentId }) => {
             >
               {' '}
               {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply */}
-              <BsReply /> reply
+              <span><BsReply size={20}/></span> 
+              <span>reply</span> 
             </button>
             <button
               className={styles.customBtn}
@@ -60,7 +62,8 @@ const CommentStructure = ({ i, reply, parentId }) => {
             >
               {' '}
               {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> like */}
-              <AiOutlineHeart /> 
+              <span><AiOutlineHeart size={20}/></span>
+              <span>101</span>
             </button>
           </div>
         </div>
@@ -70,8 +73,9 @@ const CommentStructure = ({ i, reply, parentId }) => {
           <Popup
             role='tooltip'
             trigger={
-              <button className={styles.actionsBtn}>
-                <FontAwesomeIcon icon={faEllipsisV} size='1x' color='#b9b9b9' />
+              <button className={styles.customBtn}>
+                {/* <FontAwesomeIcon icon={faEllipsisV} size='1x' color='#b9b9b9' /> */}
+                <BiEdit size={20}/>
               </button>
             }
             position='right center'
