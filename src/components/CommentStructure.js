@@ -1,8 +1,10 @@
 import React, { useContext } from 'react'
 import styles from '../Style.scss'
 import Popup from 'reactjs-popup'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
+import { BsReply } from "react-icons/bs"
+import { AiOutlineHeart } from "react-icons/ai"
 import {
   modal,
   modalClose,
@@ -24,7 +26,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
         className={styles.userInfo}
         style={reply && { marginLeft: 15, marginTop: '6px' }}
       >
-        <div>{i.text}</div>
+
         {/* avatar/Name/Button flex-row */}
         <div className={styles.commentsTwo}>
            {/* avatar */}
@@ -37,15 +39,28 @@ const CommentStructure = ({ i, reply, parentId }) => {
           </div> 
             {/* fullName */}
           <div className={styles.fullName}>{i.fullName} </div>
-            {/* buttons */}
-          <div>
+        </div>
+        <div>
+          {i.text}
+          {/* buttons */}
+          <div style={{display : 'flex', flexDirection: 'row'}}>
             <button
-              className={styles.replyBtn}
+              className={styles.customBtn}
               onClick={() => actions.handleAction(i.comId)}
               // disabled={!actions.user}
             >
               {' '}
-              <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply
+              {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply */}
+              <BsReply /> reply
+            </button>
+            <button
+              className={styles.customBtn}
+              onClick={() => actions.handleAction(i.comId)}
+              // disabled={!actions.user}
+            >
+              {' '}
+              {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> like */}
+              <AiOutlineHeart /> 
             </button>
           </div>
         </div>
