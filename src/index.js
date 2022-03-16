@@ -12,7 +12,8 @@ export const CommentSection = ({
   signinUrl,
   signupUrl,
   signInFunc,
-  customInput
+  customInput,
+  handleLike
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -28,6 +29,7 @@ export const CommentSection = ({
       signupUrl={signupUrl}
       signInFunc = {signInFunc}
       customInput={customInput}
+      handleLike = {handleLike}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>

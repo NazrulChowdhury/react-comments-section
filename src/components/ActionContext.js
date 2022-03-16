@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import uuid from 'react-uuid'
+import { processLike } from './processLike'
 
 export const ActionContext = createContext()
 export const ActionProvider = ({
@@ -10,10 +11,12 @@ export const ActionProvider = ({
   signinUrl,
   signupUrl,
   signInFunc,
-  customInput
+  customInput,
+  handleLike,
+  handleUnlike
 }) => {
   const [replies, setReplies] = useState([])
-  const [user, setUser] = useState()
+  const [user, setUser] = useState('')
   const [editArr, setEdit] = useState([])
 
   useEffect(() => {
@@ -30,6 +33,20 @@ export const ActionProvider = ({
       return
     }
     edit ? setEdit([...editArr, id]) : setReplies([...replies, id])
+  }
+  const likeTrigger = (id,parentId) => {
+    if(!user){
+      signInFunc()
+      return
+    }
+    // to post data to the backend 
+    // handleLike()
+    // to update data on the frontend
+    const newComments = processLike(id,parentId,comments)
+    setComment(newComments)
+  }
+  const unlikeTrigger = (id) =>{
+    handleUnlike()
   }
   const handleCancel = (id, edit) => {
     if (edit) {
@@ -136,6 +153,8 @@ export const ActionProvider = ({
         userId: currentUser && currentUser.userId,
         handleAction: handleAction,
         handleCancel: handleCancel,
+        likeTrigger : likeTrigger,
+        unlikeTrigger : unlikeTrigger,
         replies: replies,
         setReplies: setReplies,
         editArr: editArr,

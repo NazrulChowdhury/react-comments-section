@@ -42,6 +42,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
           <div className={styles.fullName}>{i.fullName} </div>
         </div>
         <div>
+           {/* comment */}
           {i.text}
           {/* buttons */}
           <div style={{display : 'flex', flexDirection: 'row'}}>
@@ -57,13 +58,13 @@ const CommentStructure = ({ i, reply, parentId }) => {
             </button>
             <button
               className={styles.customBtn}
-              onClick={() => actions.handleAction(i.comId)}
+              onClick={() => actions.likeTrigger(i.comId, parentId)}
               // disabled={!actions.user}
             >
               {' '}
               {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> like */}
               <span><AiOutlineHeart size={20}/></span>
-              <span>101</span>
+              <span>{i.likeCount? i.likeCount : 'none'}</span>
             </button>
           </div>
         </div>
