@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import { BsReply } from "react-icons/bs"
 import { BiEdit } from "react-icons/bi"
-import { AiOutlineHeart } from "react-icons/ai"
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import {
   modal,
   modalClose,
@@ -46,29 +46,42 @@ const CommentStructure = ({ i, reply, parentId }) => {
           {i.text}
           {/* buttons */}
           <div style={{display : 'flex', flexDirection: 'row'}}>
-            <button
-              className={styles.customBtn}
-              onClick={() => actions.handleAction(i.comId)}
-              // disabled={!actions.user}
-            >
-              {' '}
-              {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply */}
-              <span><BsReply size={20}/></span> 
-              <span>reply</span> 
-            </button>
-            <button
-              className={styles.customBtn}
-              onClick={() => actions.likeTrigger(i.comId, parentId)}
-              // disabled={!actions.user}
-            >
-              {' '}
-              {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> like */}
-              <span><AiOutlineHeart size={20}/></span>
-              <span>{i.likeCount? i.likeCount : 'none'}</span>
-            </button>
+            <div>
+              <button
+                className={styles.customBtn}
+                onClick={() => actions.handleAction(i.comId)}
+                // disabled={!actions.user}
+              >
+                {' '}
+                {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply */}
+                <span><BsReply size={20}/></span> 
+                <span>reply</span> 
+              </button>
+              {'  '}
+            </div>
+            <div>
+              <button
+                className={styles.customBtn}
+                onClick={() => {
+                  if(actions.userId && i.likerId.find(id => id == actions.userId)){
+                    actions.unlikeTrigger(i.comId, parentId)
+                  } else{                 
+                    actions.likeTrigger(i.comId, parentId)
+                  }
+                }}
+              >
+                {' '}
+                {actions.userId && i.likerId.length && i.likerId.find(id => id == actions.userId)?
+                <span><AiFillHeart style={{color : 'red'}} size={20}/></span> :
+                <span><AiOutlineHeart size={20}/></span>
+                }             
+                <span>{i.likeCount? i.likeCount : null}</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
+        {/* edit button */}
       <div className={styles.userActions}>
         {actions.userId === i.userId && actions.user && (
           <Popup
@@ -79,7 +92,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
                 <BiEdit size={20}/>
               </button>
             }
-            position='right center'
+            position='left center'
             nested
           >
             <div className={styles.actionDiv}>

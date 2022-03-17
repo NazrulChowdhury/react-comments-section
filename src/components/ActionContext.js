@@ -18,6 +18,7 @@ export const ActionProvider = ({
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
   const [editArr, setEdit] = useState([])
+  const {userId} = currentUser
 
   useEffect(() => {
     if (currentUser) {
@@ -32,21 +33,23 @@ export const ActionProvider = ({
       signInFunc()
       return
     }
-    edit ? setEdit([...editArr, id]) : setReplies([...replies, id])
+    // edit ? setEdit([...editArr, id]) : setReplies([...replies, id])
+    if(edit){setEdit([...editArr, id])} else {setReplies([...replies, id])}
   }
+
   const likeTrigger = (id,parentId) => {
     if(!user){
       signInFunc()
       return
-    }
-    // to post data to the backend 
-    // handleLike()
-    // to update data on the frontend
-    const newComments = processLike(id,parentId,comments)
+    } 
+    // handleLike(id,parentId) // to post data to the backend
+    const newComments = processLike(userId, id, parentId, comments, 'like')
     setComment(newComments)
   }
-  const unlikeTrigger = (id) =>{
-    handleUnlike()
+  const unlikeTrigger = (id,parentId) =>{
+    //handleUnlike(id,parentId)   // to post data to the backend 
+    const newComments = processLike(userId, id, parentId, comments, 'unLike')
+    setComment(newComments)
   }
   const handleCancel = (id, edit) => {
     if (edit) {
@@ -70,7 +73,9 @@ export const ActionProvider = ({
             comId: uuid(),
             avatarUrl: currentUser.avatarUrl,
             fullName: currentUser.name,
-            text: text
+            text: text,
+            likeCount: 0,
+            likerId: []
           }
         ])
       } else if (parentId && child) {
@@ -81,7 +86,9 @@ export const ActionProvider = ({
           comId: uuid(),
           avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
-          text: text
+          text: text,
+          likeCount: 0,
+          likerId: []
         })
         setComment(newList)
       } else if (parentId && !child) {
@@ -96,7 +103,9 @@ export const ActionProvider = ({
           comId: uuid(),
           avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
-          text: text
+          text: text,
+          likeCount: 0,
+          likerId: []
         })
         newList[index].replies = newReplies
         setComment(newList)

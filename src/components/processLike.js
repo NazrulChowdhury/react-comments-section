@@ -1,25 +1,41 @@
-export const processLike = (id,parentId,comments) => {
+export const processLike = (userId,id,parentId,comments, action) => {
     if(!parentId) {
         const updatedComments= comments.map(comment =>{
            if(comment.comId == id) {
-               comment.likeCount++ 
+               if(action =='like') {
+                comment.likeCount++
+                comment.likerId.push(userId)
+               } else {
+                   comment.likeCount--
+                   comment.likerId = comment.likerId.filter(id => id !== userId)
+               }         
             }
             return comment
         })  
         return updatedComments     
-    } else {
+    } 
+    if(parentId){
         const updatedComments = comments.map(comment => {
-            const {replies} = comment
-            if(replies){
-                const updatedReplies = replies.map(reply =>{
+            if(comment.replies){
+                const updatedReplies = comment.replies.map(reply =>{
                     if(reply.comId == id){
-                        reply.likeCount++
+                        if(action =='like') {
+                            reply.likeCount++
+                            reply.likerId.push(userId)
+                        } else {
+                            reply.likeCount--
+                            reply.likerId = reply.likerId.filter(id => id !== userId)
+                        } 
                     }
                     return reply
                 })
-                return updatedReplies
+                comment.replies = updatedReplies
+                return comment
+            } else {
+                return comment
             }
         })
         return updatedComments
     }
+    
 }
