@@ -178,13 +178,26 @@
     outline:none;
     border:none;
     cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+  }
+  .editBtn:hover {
+    color: #2980b9;
   }
   .deleteBtn{
     background-color: transparent;
     outline:none;
     border:none;
     cursor: pointer;
-
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+  }
+  .deleteBtn:hover {
+    color: #2980b9;
   }
 }
 

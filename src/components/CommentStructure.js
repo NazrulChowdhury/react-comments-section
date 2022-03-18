@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import { BsReply } from "react-icons/bs"
 import { BiEdit } from "react-icons/bi"
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai" 
+import { MdOutlineDeleteOutline } from "react-icons/md" 
+import { IoOptionsOutline } from "react-icons/io5"
 import {
   modal,
   modalClose,
@@ -49,7 +51,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
             <div>
               <button
                 className={styles.customBtn}
-                onClick={() => actions.handleAction(i.comId)}
+                onClick={() => actions.handleAction(i.comId, null, i.userId, fullName)}
                 // disabled={!actions.user}
               >
                 {' '}
@@ -89,7 +91,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
             trigger={
               <button className={styles.customBtn}>
                 {/* <FontAwesomeIcon icon={faEllipsisV} size='1x' color='#b9b9b9' /> */}
-                <BiEdit size={20}/>
+                <IoOptionsOutline size={20}/>
               </button>
             }
             position='left center'
@@ -101,14 +103,17 @@ const CommentStructure = ({ i, reply, parentId }) => {
                   className={styles.editBtn}
                   onClick={() => actions.handleAction(i.comId, edit)}
                 >
-                  {' '}
-                  edit
+                  <span><BiEdit size={20}/> </span> 
+                  <span>{'  '}edit</span>
                 </button>
               </div>
               <div>
                 <Popup
                   trigger={
-                    <button className={styles.deleteBtn}> delete</button>
+                    <button className={styles.deleteBtn}>
+                     <span> <MdOutlineDeleteOutline size = {20}/> </span>  
+                     <span>{'  '}delete</span>
+                    </button>
                   }
                   modal
                   nested

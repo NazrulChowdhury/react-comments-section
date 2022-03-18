@@ -13,11 +13,12 @@ export const ActionProvider = ({
   signInFunc,
   customInput,
   handleLike,
-  handleUnlike
+  handleComment
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
   const [editArr, setEdit] = useState([])
+  const [replyTargetUser, setReplyTargetUser] = useState('')
   const {userId} = currentUser
 
   useEffect(() => {
@@ -28,13 +29,15 @@ export const ActionProvider = ({
     }
   })
 
-  const handleAction = (id, edit) => {
+  const handleAction = (comId, edit, userId, fullName) => {
     if(!user){
       signInFunc()
       return
     }
-    // edit ? setEdit([...editArr, id]) : setReplies([...replies, id])
-    if(edit){setEdit([...editArr, id])} else {setReplies([...replies, id])}
+    edit ? setEdit([...editArr, comId]) : 
+    (
+      setReplies([...replies, comId])
+    )
   }
 
   const likeTrigger = (id,parentId) => {
@@ -42,14 +45,16 @@ export const ActionProvider = ({
       signInFunc()
       return
     } 
-    // handleLike(id,parentId) // to post data to the backend
     const newComments = processLike(userId, id, parentId, comments, 'like')
     setComment(newComments)
+    // post to the backend
+    handleLike('like', id, parentId)
   }
   const unlikeTrigger = (id,parentId) =>{
-    //handleUnlike(id,parentId)   // to post data to the backend 
     const newComments = processLike(userId, id, parentId, comments, 'unLike')
     setComment(newComments)
+     //post to the backend 
+     handleLike('unLike', id, parentId)
   }
   const handleCancel = (id, edit) => {
     if (edit) {
@@ -110,6 +115,8 @@ export const ActionProvider = ({
         newList[index].replies = newReplies
         setComment(newList)
       }
+      // post to backend
+      handleComment(parentId)
     }
   }
 
