@@ -21,11 +21,17 @@ const DisplayComments = ({ comments }) => {
                 edit: true
               })
             ) : (
-              <InputField cancellor={i.comId} value={i.text} edit />
+              <InputField 
+              cancellor={i.comId} 
+              value={i.text} 
+              edit 
+              />
             )
           ) : (
             <CommentStructure i={i} handleEdit={() => actions.handleAction} />
           )}
+
+
           {actions.replies.filter((id) => id === i.comId).length !== 0 &&
             (actions.customInput ? (
               actions.customInput({
@@ -36,8 +42,15 @@ const DisplayComments = ({ comments }) => {
                 edit: false
               })
             ) : (
-              <InputField cancellor={i.comId} parentId={i.comId} />
+              <InputField 
+              cancellor={i.comId} 
+              parentId={i.comId} 
+              fullName = {i.fullName} 
+              targetUserId = {i.userId}
+              targetCommentId = {i.comId}
+              />
             ))}
+
           <div className={styles.replySection}>
             {i.replies &&
               i.replies.map((a, index) => (
@@ -59,6 +72,7 @@ const DisplayComments = ({ comments }) => {
                         value={a.text}
                         edit
                         parentId={i.comId}
+                        targetCommentId = {a.comId}
                       />
                     )
                   ) : (
@@ -85,6 +99,9 @@ const DisplayComments = ({ comments }) => {
                         cancellor={a.comId}
                         parentId={i.comId}
                         child
+                        fullName = {a.fullName}
+                        targetUserId = {a.userId}
+                        targetCommentId = {a.comId}
                       />
                     ))}
                 </div>

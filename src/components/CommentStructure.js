@@ -51,7 +51,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
             <div>
               <button
                 className={styles.customBtn}
-                onClick={() => actions.handleAction(i.comId, null, i.userId, fullName)}
+                onClick={() => actions.handleAction(i.comId)}
                 // disabled={!actions.user}
               >
                 {' '}

@@ -13,7 +13,9 @@ export const ActionProvider = ({
   signInFunc,
   customInput,
   handleLike,
-  handleComment
+  handleComment,
+  handleEdit,
+  handleDelete
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -29,7 +31,7 @@ export const ActionProvider = ({
     }
   })
 
-  const handleAction = (comId, edit, userId, fullName) => {
+  const handleAction = (comId, edit) => {
     if(!user){
       signInFunc()
       return
@@ -48,13 +50,13 @@ export const ActionProvider = ({
     const newComments = processLike(userId, id, parentId, comments, 'like')
     setComment(newComments)
     // post to the backend
-    handleLike('like', id, parentId)
+    handleLike(userId,'like', id, parentId)
   }
   const unlikeTrigger = (id,parentId) =>{
     const newComments = processLike(userId, id, parentId, comments, 'unLike')
     setComment(newComments)
      //post to the backend 
-     handleLike('unLike', id, parentId)
+     handleLike(userId,'unLike', id, parentId)
   }
   const handleCancel = (id, edit) => {
     if (edit) {
@@ -68,7 +70,7 @@ export const ActionProvider = ({
     }
   }
 
-  const onSubmit = (text, parentId, child) => {
+  const onSubmit = (text, parentId, child, targetUserId, targetCommentId) => {
     if (text.length > 0) {
       if (!parentId && !child) {
         setComment([
@@ -116,11 +118,11 @@ export const ActionProvider = ({
         setComment(newList)
       }
       // post to backend
-      handleComment(parentId)
+      handleComment(userId, parentId, targetUserId, targetCommentId)
     }
   }
 
-  const editText = (id, text, parentId) => {
+  const editText = (id, text, parentId, targetCommentId) => {
     if (parentId === undefined) {
       const newList = [...comments]
       const index = newList.findIndex((x) => x.comId === id)
@@ -133,6 +135,8 @@ export const ActionProvider = ({
       newList[index].replies[replyIndex].text = text
       setComment(newList)
     }
+    // post to backend
+    handleEdit(userId, parentId, targetCommentId)
   }
 
   const deleteText = (id, parentId) => {
@@ -147,15 +151,16 @@ export const ActionProvider = ({
       newList[index].replies = filter
       setComment(newList)
     }
+    handleDelete(userId, id, parentId)
   }
 
-  const submit = (cancellor, text, parentId, edit, setText, child) => {
+  const submit = (cancellor, text, parentId, edit, setText,targetUserId, targetCommentId, child) => {
     if (edit) {
-      editText(cancellor, text, parentId)
+      editText(cancellor, text, parentId, targetCommentId)
       handleCancel(cancellor, edit)
       setText('')
     } else {
-      onSubmit(text, parentId, child)
+      onSubmit(text, parentId, child, targetUserId, targetCommentId)
       handleCancel(cancellor)
       setText('')
     }

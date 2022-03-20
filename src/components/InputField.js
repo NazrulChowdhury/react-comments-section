@@ -2,17 +2,16 @@ import React, { useContext, useState, useEffect } from 'react'
 import styles from '../Style.scss'
 import { ActionContext } from './ActionContext'
 
-const InputField = ({ cancellor, parentId, child, value, edit, main }) => {
-  const [text, setText] = useState('')
-
+const InputField = ({ cancellor, parentId, child, value, edit, main, fullName, targetUserId, targetCommentId,replyId }) => {
+  const [text, setText] = useState(!parentId? '' : `@${fullName}   `)
   const handleChange = (e) => {
-    setText(e.target.value)
+    setText(e.target.value) 
   }
 
   useEffect(() => {
     setText(value)
   }, [value])
-
+  
   const actions = useContext(ActionContext)
   return (
     <form
@@ -35,7 +34,7 @@ const InputField = ({ cancellor, parentId, child, value, edit, main }) => {
         type='text'
         placeholder='Type your reply here.'
         component='input'
-        value={text}
+        value={text} 
         onChange={handleChange}
       />
       <div className={styles.inputActions}>
@@ -43,8 +42,8 @@ const InputField = ({ cancellor, parentId, child, value, edit, main }) => {
           className={styles.postBtn}
           onClick={() =>
             edit === true
-              ? actions.submit(cancellor, text, parentId, true, setText)
-              : actions.submit(cancellor, text, parentId, false, setText)
+              ? actions.submit(cancellor, text, parentId, true, setText, null, targetCommentId)
+              : actions.submit(cancellor, text, parentId, false, setText,targetUserId, targetCommentId)
           }
           type='button'
           disabled={!text}
