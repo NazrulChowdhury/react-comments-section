@@ -46,7 +46,7 @@ const DisplayComments = ({ comments }) => {
               <InputField 
               cancellor={i.comId} 
               parentId={i.comId} 
-              fullName = {i.fullName} 
+              replyTargetName = {i.fullName} 
               targetUserId = {i.userId}
               targetCommentId = {i.comId}
               />
@@ -82,6 +82,7 @@ const DisplayComments = ({ comments }) => {
                       reply
                       parentId={i.comId}
                       handleEdit={() => actions.handleAction}
+                      replyTargetName = {a.replyTargetName? a.replyTargetName : null}
                     />
                   )}
                   {actions.replies.filter((id) => id === a.comId).length !==
@@ -100,7 +101,7 @@ const DisplayComments = ({ comments }) => {
                         cancellor={a.comId}
                         parentId={i.comId}
                         child
-                        fullName = {a.fullName}
+                        replyTargetName = {a.fullName}
                         targetUserId = {a.userId}
                         targetCommentId = {a.comId}
                       />

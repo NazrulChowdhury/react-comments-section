@@ -7,7 +7,7 @@ import * as yup from "yup"
 
 
 
-const InputField = ({ cancellor, parentId, child, value, edit, main, fullName, targetUserId, targetCommentId }) => {
+const InputField = ({ cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId }) => {
   const actions = useContext(ActionContext)
   const schema = yup.object({
     comment: yup.string()
@@ -20,13 +20,13 @@ const InputField = ({ cancellor, parentId, child, value, edit, main, fullName, t
   const { register, resetField, handleSubmit, formState:{ errors } } = useForm({
     resolver: yupResolver(schema),
     defaultValues : {
-      "comment" : edit? (value) : (!parentId? '' : `@${fullName}   `)
+      "comment" : edit? (value) : null
     }
   })
   const postForm = (data) => {
     edit === true
     ? actions.submit(cancellor, data.comment, parentId, true, setText, null, targetCommentId)
-    : actions.submit(cancellor, data.comment, parentId, false, setText,targetUserId, targetCommentId)
+    : actions.submit(cancellor, data.comment, parentId, false, setText,targetUserId, targetCommentId,replyTargetName)
   }
   const onSubmit = (data) => {
     postForm(data)

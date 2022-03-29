@@ -17,7 +17,7 @@ import {
 } from './ModalStyles'
 import { ActionContext } from './ActionContext'
 
-const CommentStructure = ({ i, reply, parentId }) => {
+const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
   const edit = true
 
@@ -41,7 +41,10 @@ const CommentStructure = ({ i, reply, parentId }) => {
             {/* fullName */}
           <div className={styles.fullName}>{i.fullName} </div>
         </div>
-        {/* <div> </div> */}
+        {replyTargetName && 
+        <div style={{fontSize : '12px', color : 'gray', marginBottom : '5px'}}>
+          replying to{<b>{' '+replyTargetName}</b>} 
+        </div>}
         <div>
            {/* comment */}
           {i.text}
@@ -66,7 +69,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
                   if(actions.userId && i.likerId.find(id => id == actions.userId)){
                     actions.unlikeTrigger(i.comId, parentId)
                   } else{                 
-                    actions.likeTrigger(i.comId, parentId)
+                    actions.likeTrigger(i.comId, parentId, i.userId)
                   }
                 }}
               >
