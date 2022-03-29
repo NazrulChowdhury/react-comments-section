@@ -1,8 +1,6 @@
 import React, { useContext } from 'react'
 import styles from '../Style.scss'
 import Popup from 'reactjs-popup'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faReply, faEllipsisV } from '@fortawesome/free-solid-svg-icons'
 import { BsReply } from "react-icons/bs"
 import { BiEdit } from "react-icons/bi"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai" 
@@ -43,6 +41,7 @@ const CommentStructure = ({ i, reply, parentId }) => {
             {/* fullName */}
           <div className={styles.fullName}>{i.fullName} </div>
         </div>
+        {/* <div> </div> */}
         <div>
            {/* comment */}
           {i.text}
@@ -55,7 +54,6 @@ const CommentStructure = ({ i, reply, parentId }) => {
                 // disabled={!actions.user}
               >
                 {' '}
-                {/* <FontAwesomeIcon icon={faReply} size='1x' color='#a5a5a5' /> Reply */}
                 <span><BsReply size={20}/></span> 
                 <span>reply</span> 
               </button>

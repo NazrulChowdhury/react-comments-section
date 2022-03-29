@@ -16,7 +16,8 @@ export const CommentSection = ({
   handleLike,
   handleComment,
   handleEdit,
-  handleDelete
+  handleDelete,
+  commentLimit
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -36,6 +37,7 @@ export const CommentSection = ({
       handleComment = {handleComment}
       handleEdit = {handleEdit}
       handleDelete = {handleDelete}
+      commentLimit = {commentLimit}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>

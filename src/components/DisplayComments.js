@@ -25,6 +25,7 @@ const DisplayComments = ({ comments }) => {
               cancellor={i.comId} 
               value={i.text} 
               edit 
+              targetCommentId = {i.comId}
               />
             )
           ) : (

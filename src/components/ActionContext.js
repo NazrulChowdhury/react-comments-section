@@ -15,7 +15,8 @@ export const ActionProvider = ({
   handleLike,
   handleComment,
   handleEdit,
-  handleDelete
+  handleDelete,
+  commentLimit
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -151,7 +152,7 @@ export const ActionProvider = ({
       newList[index].replies = filter
       setComment(newList)
     }
-    handleDelete(userId, id, parentId)
+    handleDelete(userId, parentId, id) 
   }
 
   const submit = (cancellor, text, parentId, edit, setText,targetUserId, targetCommentId, child) => {
@@ -185,7 +186,8 @@ export const ActionProvider = ({
         signupUrl: signupUrl,
         user: user,
         customInput: customInput,
-        submit: submit
+        submit: submit,
+        commentLimit : commentLimit
       }}
     >
       {children}
