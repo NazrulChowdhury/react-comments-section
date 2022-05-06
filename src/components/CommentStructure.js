@@ -66,7 +66,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               <button
                 className={styles.customBtn}
                 onClick={() => {
-                  if(actions.userId && i.likerId.find(id => id == actions.userId)){
+                  if(actions.userId && i.likersId.find(id => id == actions.userId)){
                     actions.unlikeTrigger(i.comId, parentId)
                   } else{                 
                     actions.likeTrigger(i.comId, parentId, i.userId)
@@ -74,7 +74,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                 }}
               >
                 {' '}
-                {actions.userId && i.likerId.length && i.likerId.find(id => id == actions.userId)?
+                {actions.userId && i.likersId.length && i.likersId.find(id => id == actions.userId)?
                 <span><AiFillHeart style={{color : 'red'}} size={20}/></span> :
                 <span><AiOutlineHeart size={20}/></span>
                 }             

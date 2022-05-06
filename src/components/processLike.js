@@ -4,10 +4,10 @@ export const processLike = (userId,id,parentId,comments, action) => {
            if(comment.comId == id) {
                if(action =='like') {
                 comment.likeCount++
-                comment.likerId.push(userId)
+                comment.likersId.push(userId)
                } else {
                    comment.likeCount--
-                   comment.likerId = comment.likerId.filter(id => id !== userId)
+                   comment.likersId = comment.likersId.filter(id => id !== userId)
                }         
             }
             return comment
@@ -21,10 +21,10 @@ export const processLike = (userId,id,parentId,comments, action) => {
                     if(reply.comId == id){
                         if(action =='like') {
                             reply.likeCount++
-                            reply.likerId.push(userId)
+                            reply.likersId.push(userId)
                         } else {
                             reply.likeCount--
-                            reply.likerId = reply.likerId.filter(id => id !== userId)
+                            reply.likersId = reply.likersId.filter(id => id !== userId)
                         } 
                     }
                     return reply

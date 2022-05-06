@@ -85,7 +85,7 @@ export const ActionProvider = ({
             fullName: currentUser.name,
             text: text,
             likeCount: 0,
-            likerId: []
+            likersId: []
           }
         ])
       } else if (parentId && child) {
@@ -98,7 +98,7 @@ export const ActionProvider = ({
           fullName: currentUser.name,
           text: text,
           likeCount: 0,
-          likerId: [],
+          likersId: [],
           replyTargetName : replyTargetName
         })
         setComment(newList)
@@ -116,7 +116,7 @@ export const ActionProvider = ({
           fullName: currentUser.name,
           text: text,
           likeCount: 0,
-          likerId: [],
+          likersId: [],
           replyTargetName : replyTargetName
         })
         newList[index].replies = newReplies
