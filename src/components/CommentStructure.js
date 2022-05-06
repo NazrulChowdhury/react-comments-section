@@ -16,6 +16,7 @@ import {
   modalDelBtn
 } from './ModalStyles'
 import { ActionContext } from './ActionContext'
+import { toShortFormat } from '../functions'
 
 const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
@@ -79,6 +80,11 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                 <span><AiOutlineHeart size={20}/></span>
                 }             
                 <span>{i.likeCount? i.likeCount : null}</span>
+              </button>
+            </div>
+            <div>
+              <button className={styles.customBtn} style={{color : 'gray'}}>
+                {toShortFormat(i.createdAt)}
               </button>
             </div>
           </div>
