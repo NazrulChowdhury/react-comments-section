@@ -6,6 +6,8 @@ import { BiEdit } from "react-icons/bi"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai" 
 import { MdOutlineDeleteOutline } from "react-icons/md" 
 import { IoOptionsOutline } from "react-icons/io5"
+import { FaUserCircle } from 'react-icons/fa'
+
 import {
   modal,
   modalClose,
@@ -32,12 +34,15 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         {/* avatar/Name/Button flex-row */}
         <div className={styles.commentsTwo}>
            {/* avatar */}
-          <div>
-            <img
-              src={i.avatarUrl}
-              style={{ width: 24, height: 24, borderRadius: 24 / 2 }}
-              alt='userIcon'
-            />
+          <div>{
+            i.avatarUrl? (
+              <img
+                src={i.avatarUrl? i.avatarUrl : profileImage }
+                style={{ width: 24, height: 24, borderRadius: 24 / 2 }}
+                alt='userIcon'
+              /> 
+            ) : <FaUserCircle size = {24} style={{color : 'green'}} />
+            }            
           </div> 
             {/* fullName */}
           <div className={styles.fullName}>{i.fullName} </div>
