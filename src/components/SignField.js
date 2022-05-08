@@ -6,11 +6,12 @@ const SignField = () => {
   const actions = useContext(ActionContext)
 
   const handleDivClick = (e) => {
-    if (e.target.name === 'login') {
-      window.location.href = actions.signinUrl
-    } else if (e.target.name === 'signup') {
-      window.location.href = actions.signupUrl
-    }
+    actions.signInFunc()
+    // if (e.target.name === 'login') {
+    //   window.location.href = actions.signinUrl
+    // } else if (e.target.name === 'signup') {
+    //   window.location.href = actions.signupUrl
+    // }
   }
 
   return (

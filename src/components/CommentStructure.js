@@ -37,7 +37,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
           <div>{
             i.avatarUrl? (
               <img
-                src={i.avatarUrl? i.avatarUrl : profileImage }
+                src={i.avatarUrl}
                 style={{ width: 24, height: 24, borderRadius: 24 / 2 }}
                 alt='userIcon'
               /> 

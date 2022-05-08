@@ -41,7 +41,7 @@ export const CommentSection = ({
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
-          {signupUrl && !currentUser ? <SignField /> : <Input />}
+          {!currentUser ? <SignField /> : <Input />}
         </div>
         <div className={styles.displayComments}>
           <DisplayComments comments={comments} />

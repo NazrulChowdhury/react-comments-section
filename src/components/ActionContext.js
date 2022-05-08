@@ -188,6 +188,7 @@ export const ActionProvider = ({
         onDelete: deleteText,
         signinUrl: signinUrl,
         signupUrl: signupUrl,
+        signInFunc : signInFunc,
         user: user,
         customInput: customInput,
         submit: submit,
