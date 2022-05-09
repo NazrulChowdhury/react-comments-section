@@ -74,24 +74,10 @@ export const ActionProvider = ({
   }
 
   const onSubmit = (text, parentId, child, targetUserId, targetCommentId, replyTargetName) => {
+    let newComment = ''
     if (text.length > 0) {
-      if (!parentId && !child) {
-        setComment([
-          ...comments,
-          {
-            userId: currentUser.userId,
-            comId: uuid(),
-            avatarUrl: currentUser.avatarUrl,
-            fullName: currentUser.name,
-            text: text,
-            likeCount: 0,
-            likersId: []
-          }
-        ])
-      } else if (parentId && child) {
-        const newList = [...comments]
-        const index = newList.findIndex((x) => x.comId === parentId)
-        newList[index].replies.push({
+      if (!parentId && !child) { // comment
+        const commentObject = {
           userId: currentUser.userId,
           comId: uuid(),
           avatarUrl: currentUser.avatarUrl,
@@ -99,17 +85,38 @@ export const ActionProvider = ({
           text: text,
           likeCount: 0,
           likersId: [],
+          createdAt : new Date()
+        }
+        setComment([
+          ...comments,
+          commentObject
+        ])
+        newComment = commentObject
+      } else if (parentId && child) {  // reply
+        const newList = [...comments]
+        const index = newList.findIndex((x) => x.comId === parentId)
+        const replyObj = {
+          userId: currentUser.userId,
+          comId: uuid(),
+          avatarUrl: currentUser.avatarUrl,
+          fullName: currentUser.name,
+          text: text,
+          likeCount: 0,
+          likersId: [],
+          createdAt : new Date(),
           replyTargetName : replyTargetName
-        })
+        }
+        newList[index].replies.push(replyObj)
         setComment(newList)
-      } else if (parentId && !child) {
+        newComment = replyObj
+      } else if (parentId && !child) { // reply
         const newList = [...comments]
         const index = newList.findIndex((x) => x.comId === parentId)
         const newReplies =
           newList[index].replies === undefined
             ? []
             : [...newList[index].replies]
-        newReplies.push({
+        const replyObj = {
           userId: currentUser.userId,
           comId: uuid(),
           avatarUrl: currentUser.avatarUrl,
@@ -117,13 +124,16 @@ export const ActionProvider = ({
           text: text,
           likeCount: 0,
           likersId: [],
+          createdAt : new Date(),
           replyTargetName : replyTargetName
-        })
+        }
+        newReplies.push(replyObj)
         newList[index].replies = newReplies
         setComment(newList)
+        newComment = replyObj
       }
       // post to backend
-      handleComment(userId, parentId, targetUserId, targetCommentId, replyTargetName)
+      handleComment(userId, parentId, targetUserId, targetCommentId, replyTargetName, newComment)
     }
   }
 
