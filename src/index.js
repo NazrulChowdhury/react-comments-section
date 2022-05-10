@@ -8,6 +8,7 @@ import Input from './components/Input'
 export const CommentSection = ({
   commentsArray,
   currentUser,
+  bookId,
   setComment,
   signinUrl,
   signupUrl,
@@ -27,6 +28,7 @@ export const CommentSection = ({
   return (
     <ActionProvider
       currentUser={currentUser}
+      bookId = {bookId}
       setComment={setComment}
       comments={comments}
       signinUrl={signinUrl}

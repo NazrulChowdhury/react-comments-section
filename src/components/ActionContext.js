@@ -6,6 +6,7 @@ export const ActionContext = createContext()
 export const ActionProvider = ({
   children,
   currentUser,
+  bookId,
   setComment,
   comments,
   signinUrl,
@@ -79,6 +80,7 @@ export const ActionProvider = ({
       if (!parentId && !child) { // comment
         const commentObject = {
           userId: currentUser.userId,
+          bookId,
           comId: uuid(),
           avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
@@ -97,6 +99,7 @@ export const ActionProvider = ({
         const index = newList.findIndex((x) => x.comId === parentId)
         const replyObj = {
           userId: currentUser.userId,
+          bookId,
           comId: uuid(),
           avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
@@ -118,6 +121,7 @@ export const ActionProvider = ({
             : [...newList[index].replies]
         const replyObj = {
           userId: currentUser.userId,
+          bookId,
           comId: uuid(),
           avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
