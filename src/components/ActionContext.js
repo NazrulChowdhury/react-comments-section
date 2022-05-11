@@ -155,7 +155,7 @@ export const ActionProvider = ({
       setComment(newList)
     }
     // post to backend
-    handleEdit(userId, parentId, targetCommentId)
+    handleEdit(userId, parentId, targetCommentId, text)
   }
 
   const deleteText = (id, parentId) => {
