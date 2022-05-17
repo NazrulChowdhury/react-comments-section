@@ -45,7 +45,7 @@ const InputField = ({ cancellor, parentId, child, value, edit, main, replyTarget
       style={
         !child && !edit && main === undefined
           ? { marginLeft: 36 }
-          : { marginLeft: 8 }
+          : { marginLeft: 0 }
       }
     >
       <div className={styles.userImg}>
