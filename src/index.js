@@ -18,7 +18,8 @@ export const CommentSection = ({
   handleComment,
   handleEdit,
   handleDelete,
-  commentLimit
+  commentLimit,
+  CommentMain // if true then main comment section input will be rendered.
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -43,7 +44,7 @@ export const CommentSection = ({
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
-          {!currentUser ? <SignField /> : <Input />}
+          {CommentMain ? (!currentUser ? <SignField /> : <Input />) : null}
         </div>
         <div className={styles.displayComments}>
           <DisplayComments comments={comments} />
