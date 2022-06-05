@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from '../Style.scss'
 import InputField from './InputField'
 import { ActionContext } from './ActionContext'
@@ -7,6 +7,7 @@ import CommentStructure from './CommentStructure'
 // import '../popup.css'
 const DisplayComments = ({ comments }) => {
   const actions = useContext(ActionContext)
+  const [showRepliesCommentId, setShowRepliesCommentId] = useState([])
   return (
     <div>
       {comments.map((i, index) => (
@@ -29,7 +30,26 @@ const DisplayComments = ({ comments }) => {
               />
             )
           ) : (
-            <CommentStructure i={i} handleEdit={() => actions.handleAction} />
+            <div> 
+              <CommentStructure i={i} handleEdit={() => actions.handleAction} />
+              {i.replies?.length && !showRepliesCommentId.find(id => id === i.comId) &&
+              <span 
+                onClick={()=> setShowRepliesCommentId([...showRepliesCommentId ,i.comId])}
+                style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
+              >
+                — show {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
+              </span>}
+              {showRepliesCommentId.length && showRepliesCommentId.find(id => id == i.comId) ?
+              <span 
+                onClick={()=> {
+                  setShowRepliesCommentId(showRepliesCommentId.filter(id => id !== i.comId))}
+                }
+                style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
+              >
+              — hide {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
+              </span> : null
+              }
+            </div>
           )}
 
 
@@ -53,7 +73,7 @@ const DisplayComments = ({ comments }) => {
             ))}
 
           <div className={styles.replySection}>
-            {i.replies &&
+            {i.replies && 
               i.replies.map((a, index) => (
                 <div key={a.comId}>
                   {actions.editArr.filter((id) => id === a.comId).length !==
@@ -77,13 +97,14 @@ const DisplayComments = ({ comments }) => {
                       />
                     )
                   ) : (
-                    <CommentStructure
-                      i={a}
-                      reply
-                      parentId={i.comId}
-                      handleEdit={() => actions.handleAction}
-                      replyTargetName = {a.replyTargetName? a.replyTargetName : null}
-                    />
+                    showRepliesCommentId.length && showRepliesCommentId.find(id => id == i.comId) ? 
+                      <CommentStructure
+                        i={a}
+                        reply
+                        parentId={i.comId}
+                        handleEdit={() => actions.handleAction}
+                        replyTargetName = {a.replyTargetName? a.replyTargetName : null}
+                      /> : null
                   )}
                   {actions.replies.filter((id) => id === a.comId).length !==
                     0 &&
