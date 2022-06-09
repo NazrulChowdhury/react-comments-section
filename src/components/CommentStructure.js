@@ -51,15 +51,16 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         <div style={{fontSize : '12px', color : 'gray', marginBottom : '5px'}}>
           replying to{<b>{' '+replyTargetName}</b>} 
         </div>}
-        <div>
+        <div style = {{marginTop : '10px'}}>
            {/* comment */}
           {i.text}
           {/* buttons */}
-          <div style={{display : 'flex', flexDirection: 'row'}}>
+          <div style={{display : 'flex', flexDirection: 'row',marginTop : '10px'}}>
             <div>
               <button
                 className={styles.customBtn}
                 onClick={() => actions.handleAction(i.comId)}
+                style = {{cursor : 'pointer'}}
                 // disabled={!actions.user}
               >
                 {' '}
@@ -71,6 +72,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
             <div>
               <button
                 className={styles.customBtn}
+                style = {{cursor : 'pointer'}}
                 onClick={() => {
                   if(actions.userId && i.likersId.find(id => id == actions.userId)){
                     actions.unlikeTrigger(i.comId, parentId)
@@ -96,7 +98,10 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         </div>
       </div>
         {/* edit button */}
-      <div className={styles.userActions}>
+      <div 
+        className={styles.userActions}
+        style = {{cursor : 'pointer'}}
+      >
         {actions.userId === i.userId && actions.user && (
           <Popup
             role='tooltip'
