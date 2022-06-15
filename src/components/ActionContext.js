@@ -106,8 +106,9 @@ export const ActionProvider = ({
           text: text,
           likeCount: 0,
           likersId: [],
-          createdAt : new Date(),
-          replyTargetName : replyTargetName
+          replyTargetName : replyTargetName,
+          replyTargetUserId : targetUserId,
+          createdAt : new Date()
         }
         newList[index].replies.push(replyObj)
         setComment(newList)
@@ -128,8 +129,9 @@ export const ActionProvider = ({
           text: text,
           likeCount: 0,
           likersId: [],
-          createdAt : new Date(),
-          replyTargetName : replyTargetName
+          replyTargetName : replyTargetName,
+          replyTargetUserId : targetUserId,
+          createdAt : new Date()
         }
         newReplies.push(replyObj)
         newList[index].replies = newReplies
