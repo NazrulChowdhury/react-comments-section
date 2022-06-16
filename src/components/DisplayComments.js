@@ -32,22 +32,29 @@ const DisplayComments = ({ comments }) => {
           ) : (
             <div> 
               <CommentStructure i={i} handleEdit={() => actions.handleAction} />
-              {i.replies?.length && !showRepliesCommentId.find(id => id === i.comId) &&
-              <span 
-                onClick={()=> setShowRepliesCommentId([...showRepliesCommentId ,i.comId])}
-                style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
-              >
-                — show {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
-              </span>}
+              {
+                i.replies?.length && !showRepliesCommentId.find(id => id === i.comId)?
+                (<span 
+                  onClick={()=> setShowRepliesCommentId([...showRepliesCommentId ,i.comId])}
+                  style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
+                >
+                  — show {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
+                </span>) 
+                : null
+              }
               {showRepliesCommentId.length && showRepliesCommentId.find(id => id == i.comId) ?
-              <span 
+              (<span 
                 onClick={()=> {
                   setShowRepliesCommentId(showRepliesCommentId.filter(id => id !== i.comId))}
                 }
                 style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
-              >
-              — hide {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
-              </span> : null
+              > {
+                  i.replies.length ? (
+                    <span>
+                      — hide {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
+                    </span>) : null
+                }
+              </span>) : null
               }
             </div>
           )}
