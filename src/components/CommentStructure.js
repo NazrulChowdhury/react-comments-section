@@ -60,7 +60,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               <button
                 className={styles.customBtn}
                 onClick={() => actions.handleAction(i.comId)}
-                style = {{cursor : 'pointer'}}
+                style = {{cursor : 'pointer', marginRight : '10px'}}
                 // disabled={!actions.user}
               >
                 {' '}
@@ -72,7 +72,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
             <div>
               <button
                 className={styles.customBtn}
-                style = {{cursor : 'pointer'}}
+                style = {{cursor : 'pointer', marginRight : '10px'}}
                 onClick={() => {
                   if(actions.userId && i.likersId.find(id => id == actions.userId)){
                     actions.unlikeTrigger(i.comId, parentId)
@@ -86,7 +86,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                 <span><AiFillHeart style={{color : 'red'}} size={20}/></span> :
                 <span><AiOutlineHeart size={20}/></span>
                 }             
-                <span>{i.likeCount? i.likeCount : null}</span>
+                <span style={{fontSize : '10px'}}>{i.likeCount? i.likeCount : null}</span>
               </button>
             </div>
             <div>
