@@ -19,7 +19,9 @@ export const CommentSection = ({
   handleEdit,
   handleDelete,
   commentLimit,
-  CommentMain // if true then main comment section input will be rendered.
+  CommentMain, // if true then main-comment-input section will be rendered.
+  marginTop, // accommodate some margin-top for each comment if necessary 
+  sectionTop  // margin-top of the entire comment section. zero or 1px better for individual comment card. 
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -41,12 +43,16 @@ export const CommentSection = ({
       handleEdit = {handleEdit}
       handleDelete = {handleDelete}
       commentLimit = {commentLimit}
+      marginTop = {marginTop} // to create gap between two comments. not between replies. 
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
           {CommentMain ? (!currentUser ? <SignField /> : <Input />) : null}
         </div>
-        <div className={styles.displayComments}>
+        <div 
+          className={styles.displayComments}
+          style = {{marginTop : sectionTop || '18px'}}
+        >
           <DisplayComments comments={comments} />
         </div>
       </div>

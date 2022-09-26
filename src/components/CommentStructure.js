@@ -23,12 +23,12 @@ import { toShortFormat } from '../functions'
 const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
   const edit = true
-
+  const marginTop = actions.marginTop? actions.marginTop : '16px'
   return (
     <div className={styles.halfDiv}>
       <div
         className={styles.userInfo}
-        style={reply && { marginLeft: 15, marginTop: '6px' }}
+        style={reply ? { marginLeft: 15, marginTop: '6px' } : {marginTop}}
       >
 
         {/* avatar/Name/Button flex-row */}
