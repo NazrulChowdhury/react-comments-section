@@ -57,6 +57,9 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
           {i.text}
           {/* buttons */}
           <div style={{display : 'flex', flexDirection: 'row',marginTop : '10px'}}>
+            <div style={{display: 'flex', alignItems:'center' }}>
+              {i.edited? <b style={{fontSize : '12px', color : 'gray', marginRight : '5px'}}>{'Edited'}</b> : null}
+            </div>
             <div>
               <button
                 className={styles.customBtn}
