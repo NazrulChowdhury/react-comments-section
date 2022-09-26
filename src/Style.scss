@@ -248,9 +248,18 @@
 
 .customBtn {
   background: transparent;
-  border: none !important;
+  //border: none !important;
+  border: 1px solid white !important;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.customBtn:hover {
+  border: 1px solid green !important;
+  border-radius: 10px;
+}
+.dateBtn {
+  background: transparent;
+  border: none !important;
 }

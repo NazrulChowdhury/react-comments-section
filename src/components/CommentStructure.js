@@ -3,9 +3,10 @@ import styles from '../Style.scss'
 import Popup from 'reactjs-popup'
 import { BsReply } from "react-icons/bs"
 import { BiEdit } from "react-icons/bi"
+import { CgEditUnmask } from "react-icons/cg";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai" 
 import { MdOutlineDeleteOutline } from "react-icons/md" 
-import { IoOptionsOutline } from "react-icons/io5"
+//import { IoOptionsOutline } from "react-icons/io5"
 import { FaUserCircle } from 'react-icons/fa'
 
 import {
@@ -69,7 +70,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               </button>
               {'  '}
             </div>
-            <div>
+            <div> {/* like Div */}
               <button
                 className={styles.customBtn}
                 style = {{cursor : 'pointer', marginRight : '10px'}}
@@ -83,14 +84,14 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               >
                 {' '}
                 {actions.userId && i.likersId.length && i.likersId.find(id => id == actions.userId)?
-                <span><AiFillHeart style={{color : 'red'}} size={20}/></span> :
-                <span><AiOutlineHeart size={20}/></span>
+                <span style={{marginTop : '3px'}}><AiFillHeart style={{color : 'red'}} size={20}/></span> :
+                <span style={{marginTop : '3px'}}><AiOutlineHeart size={20}/></span>
                 }             
                 <span style={{fontSize : '10px'}}>{i.likeCount? i.likeCount : null}</span>
               </button>
             </div>
-            <div>
-              <button className={styles.customBtn} style={{color : 'gray'}}>
+            <div style={{display : 'flex', alignItems : 'center'}}>
+              <button className={styles.dateBtn} style={{color : 'gray'}}>
                 {toShortFormat(i.createdAt)}
               </button>
             </div>
@@ -108,7 +109,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
             trigger={
               <button className={styles.customBtn}>
                 {/* <FontAwesomeIcon icon={faEllipsisV} size='1x' color='#b9b9b9' /> */}
-                <IoOptionsOutline size={20}/>
+                <CgEditUnmask size={20}/>
               </button>
             }
             position='left center'
