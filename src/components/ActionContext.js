@@ -88,12 +88,10 @@ export const ActionProvider = ({
           text: text,
           likeCount: 0,
           likersId: [],
-          createdAt : new Date()
+          createdAt : new Date(),
+          edited : false
         }
-        setComment([
-          ...comments,
-          commentObject
-        ])
+        setComment([commentObject, ...comments])
         newComment = commentObject
       } else if (parentId && child) {  // reply
         const newList = [...comments]
@@ -149,12 +147,14 @@ export const ActionProvider = ({
       const newList = [...comments]
       const index = newList.findIndex((x) => x.comId === id)
       newList[index].text = text
+      newList[index].edited = true
       setComment(newList)
     } else if (parentId !== undefined) {
       const newList = [...comments]
       const index = newList.findIndex((x) => x.comId === parentId)
       const replyIndex = newList[index].replies.findIndex((i) => i.comId === id)
       newList[index].replies[replyIndex].text = text
+      newList[index].replies[replyIndex].edited = true
       setComment(newList)
     }
     // post to backend
