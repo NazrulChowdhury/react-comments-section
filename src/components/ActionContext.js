@@ -18,7 +18,8 @@ export const ActionProvider = ({
   handleEdit,
   handleDelete,
   commentLimit,
-  marginTop 
+  marginTop, 
+  bucketUrl
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -210,7 +211,8 @@ export const ActionProvider = ({
         customInput: customInput,
         submit: submit,
         commentLimit : commentLimit,
-        marginTop :marginTop
+        marginTop :marginTop,
+        bucketUrl : bucketUrl
       }}
     >
       {children}

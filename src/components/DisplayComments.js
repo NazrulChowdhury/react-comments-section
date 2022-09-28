@@ -27,6 +27,9 @@ const DisplayComments = ({ comments }) => {
               value={i.text} 
               edit 
               targetCommentId = {i.comId}
+              marginTop = '5px'
+              marginBottom = '5px'
+              marginRight = '5px'
               />
             )
           ) : (
@@ -76,6 +79,7 @@ const DisplayComments = ({ comments }) => {
               replyTargetName = {i.fullName} 
               targetUserId = {i.userId}
               targetCommentId = {i.comId}
+              marginRight = '5px'
               />
             ))}
 
@@ -101,6 +105,8 @@ const DisplayComments = ({ comments }) => {
                         edit
                         parentId={i.comId}
                         targetCommentId = {a.comId}
+                        marginRight = '5px'
+                        marginBottom = '5px'
                       />
                     )
                   ) : (
@@ -132,6 +138,8 @@ const DisplayComments = ({ comments }) => {
                         replyTargetName = {a.fullName}
                         targetUserId = {a.userId}
                         targetCommentId = {a.comId}
+                        marginRight = '5px'
+                        marginBottom = '5px'
                       />
                     ))}
                 </div>

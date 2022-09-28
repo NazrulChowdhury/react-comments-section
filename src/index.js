@@ -20,6 +20,7 @@ export const CommentSection = ({
   handleDelete,
   commentLimit,
   CommentMain, // if true then main-comment-input section will be rendered.
+  bucketUrl, // avatar image bucket address
   marginTop, // accommodate some margin-top for each comment if necessary 
   sectionTop  // margin-top of the entire comment section. zero or 1px better for individual comment card. 
 }) => {
@@ -43,6 +44,7 @@ export const CommentSection = ({
       handleEdit = {handleEdit}
       handleDelete = {handleDelete}
       commentLimit = {commentLimit}
+      bucketUrl = {bucketUrl}
       marginTop = {marginTop} // to create gap between two comments. not between replies. 
     >
       <div className={styles.section}>

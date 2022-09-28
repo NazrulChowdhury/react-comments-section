@@ -26,24 +26,25 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const edit = true
   const marginTop = actions.marginTop? actions.marginTop : '16px'
   return (
-    <div className={styles.halfDiv}>
+    <div 
+      className={styles.halfDiv}
+      style = {!reply ? {marginTop} : null}
+    >
       <div
         className={styles.userInfo}
-        style={reply ? { marginLeft: 15, marginTop: '6px' } : {marginTop}}
+        style={reply ? { marginLeft: 15, marginTop: '6px' } : {marginTop : '0px'}}
       >
 
         {/* avatar/Name/Button flex-row */}
         <div className={styles.commentsTwo}>
            {/* avatar */}
-          <div>{
-            i.avatarUrl? (
+          <div>
               <img
-                src={i.avatarUrl}
+                //src={i.avatarUrl}
+                src = {`${actions.bucketUrl}/${i.userId}.jpeg?`}
                 style={{ width: 24, height: 24, borderRadius: 24 / 2 }}
                 alt='userIcon'
-              /> 
-            ) : <FaUserCircle size = {24} style={{color : 'green'}} />
-            }            
+              />           
           </div> 
             {/* fullName */}
           <div className={styles.fullName}>{i.fullName} </div>
@@ -94,7 +95,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               </button>
             </div>
             <div style={{display : 'flex', alignItems : 'center'}}>
-              <button className={styles.dateBtn} style={{color : 'gray'}}>
+              <button className={styles.dateBtn} style={{color : 'gray', cursor:'default'}}>
                 {toShortFormat(i.createdAt)}
               </button>
             </div>

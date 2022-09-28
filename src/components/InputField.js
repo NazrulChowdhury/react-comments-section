@@ -7,7 +7,10 @@ import * as yup from "yup"
 import { FaUserCircle } from 'react-icons/fa'
 
 
-const InputField = ({ cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId }) => {
+const InputField = ({ 
+  cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId, 
+  marginTop, marginRight, marginBottom
+}) => {
   const actions = useContext(ActionContext)
   const schema = yup.object({
     comment: yup.string()
@@ -15,6 +18,7 @@ const InputField = ({ cancellor, parentId, child, value, edit, main, replyTarget
     .max(actions.commentLimit,`maximum ${actions.commentLimit} characters allowed! Try creating a thread instead.`)
     .required()
   }) 
+  const marginLeft = !child && !edit && main === undefined?  36 : 15 
   const [text, setText] = useState('')
 
   const { register, resetField, handleSubmit, formState:{ errors } } = useForm({
@@ -42,11 +46,7 @@ const InputField = ({ cancellor, parentId, child, value, edit, main, replyTarget
     <div>
     <form
       className={styles.form}
-      style={
-        !child && !edit && main === undefined
-          ? { marginLeft: 36 }
-          : { marginLeft: 15 }
-      }
+      style={{marginTop,marginBottom, marginLeft, marginRight, }}
     >
       <div className={styles.userImg}>
         {
