@@ -4,8 +4,6 @@ import { ActionContext } from './ActionContext'
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
-import { FaUserCircle } from 'react-icons/fa'
-
 
 const InputField = ({ 
   cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId, 
@@ -49,15 +47,15 @@ const InputField = ({
       style={{marginTop,marginBottom, marginLeft, marginRight, }}
     >
       <div className={styles.userImg}>
-        {
-          actions.userImg? (
-            <img
-              src={actions.userImg}
-              style={{ width: 38, height: 38, borderRadius: 38 / 2 }}
-              alt='userIcon'
-            />
-          ) : <FaUserCircle size = {38} style={{color : 'green'}} />
-        } 
+      <img
+          src = {`${actions.bucketUrl}/${actions.userId}.jpeg?`}
+          style={{ width: 38, height: 38, borderRadius: 38 / 2 }}
+          alt='userIcon'
+          onError={(e) => {
+            e.target.onerror = null; // prevents looping
+            e.target.src =`${actions.bucketUrl}/noImage.png`
+          }}
+        /> 
       </div>
       <input 
         {...register("comment")} 

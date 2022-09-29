@@ -7,7 +7,6 @@ import { CgEditUnmask } from "react-icons/cg";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai" 
 import { MdOutlineDeleteOutline } from "react-icons/md" 
 //import { IoOptionsOutline } from "react-icons/io5"
-import { FaUserCircle } from 'react-icons/fa'
 
 import {
   modal,
@@ -40,10 +39,13 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
            {/* avatar */}
           <div>
               <img
-                //src={i.avatarUrl}
                 src = {`${actions.bucketUrl}/${i.userId}.jpeg?`}
-                style={{ width: 24, height: 24, borderRadius: 24 / 2 }}
+                style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
                 alt='userIcon'
+                onError={(e) => {
+                  e.target.onerror = null; // prevents looping
+                  e.target.src =`${actions.bucketUrl}/noImage.png`
+                }}
               />           
           </div> 
             {/* fullName */}
