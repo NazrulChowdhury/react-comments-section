@@ -22,7 +22,8 @@ export const CommentSection = ({
   CommentMain, // if true then main-comment-input section will be rendered.
   bucketUrl, // avatar image bucket address
   marginTop, // accommodate some margin-top for each comment if necessary 
-  sectionTop  // margin-top of the entire comment section. zero or 1px better for individual comment card. 
+  sectionTop,  // margin-top of the entire comment section. zero or 1px better for individual comment card.
+  sectionLeft // entire comment section. Adjust at will for individual comment 
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -53,7 +54,7 @@ export const CommentSection = ({
         </div>
         <div 
           className={styles.displayComments}
-          style = {{marginTop : sectionTop || '18px'}}
+          style = {{marginTop : sectionTop || '18px', marginLeft : sectionLeft || '38px'}}
         >
           <DisplayComments comments={comments} />
         </div>
