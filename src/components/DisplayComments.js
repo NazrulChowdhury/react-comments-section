@@ -5,6 +5,7 @@ import { ActionContext } from './ActionContext'
 // import 'reactjs-popup/dist/index.css'
 import CommentStructure from './CommentStructure'
 import LoadReply from './LoadReply'
+import ReplyToggle from './ReplyToggle'
 // import '../popup.css'
 const DisplayComments = ({ comments, showReplyLoader }) => {
   const actions = useContext(ActionContext)
@@ -37,30 +38,11 @@ const DisplayComments = ({ comments, showReplyLoader }) => {
           ) : (
             <div> 
               <CommentStructure i={i} handleEdit={() => actions.handleAction} />
-              {
-                i.replies?.length && !showRepliesCommentId.find(id => id === i.comId)?
-                (<span 
-                  onClick={()=> setShowRepliesCommentId([...showRepliesCommentId ,i.comId])}
-                  style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
-                >
-                  — show {i.replyCount} {" "} {i.replyCount == 1? 'reply' : 'replies' }
-                </span>) 
-                : null
-              }
-              {showRepliesCommentId.length && showRepliesCommentId.find(id => id == i.comId) ?
-                (<span 
-                  onClick={()=> {
-                    setShowRepliesCommentId(showRepliesCommentId.filter(id => id !== i.comId))}
-                  }
-                  style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
-                > {
-                    i.replies.length ? (
-                      <span>
-                        — hide {" "} {i.replies.length == 1? 'reply' : 'replies' }
-                      </span>) : null
-                  }
-                </span>) : null
-              }
+              <ReplyToggle 
+                comment = {i} showRepliesCommentId = {showRepliesCommentId}
+                setShowRepliesCommentId = {setShowRepliesCommentId}
+                showOption = {true}
+              />
             </div>
           )}
 
@@ -154,6 +136,11 @@ const DisplayComments = ({ comments, showReplyLoader }) => {
                 />) : null
               }
           </div>
+          <ReplyToggle 
+            comment = {i} showRepliesCommentId = {showRepliesCommentId}
+            setShowRepliesCommentId = {setShowRepliesCommentId}
+            showOption = {false}
+          />
         </div>
       ))}
     </div>
