@@ -23,7 +23,8 @@ export const CommentSection = ({
   bucketUrl, // avatar image bucket address
   marginTop, // accommodate some margin-top for each comment if necessary 
   sectionTop,  // margin-top of the entire comment section. zero or 1px better for individual comment card.
-  sectionLeft // entire comment section. Adjust at will for individual comment 
+  sectionLeft, // entire comment section. Adjust at will for individual comment 
+  showReplyLoader
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -46,7 +47,7 @@ export const CommentSection = ({
       handleDelete = {handleDelete}
       commentLimit = {commentLimit}
       bucketUrl = {bucketUrl}
-      marginTop = {marginTop} // to create gap between two comments. not between replies. 
+      marginTop = {marginTop} // to create gap between two comments. not between replies.
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
@@ -56,7 +57,7 @@ export const CommentSection = ({
           className={styles.displayComments}
           style = {{marginTop : sectionTop || '18px', marginLeft : sectionLeft || '38px'}}
         >
-          <DisplayComments comments={comments} />
+          <DisplayComments comments={comments} showReplyLoader ={showReplyLoader} />
         </div>
       </div>
     </ActionProvider>

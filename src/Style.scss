@@ -264,3 +264,28 @@
   background: transparent;
   border: none !important;
 }
+
+// spinner css
+.pos-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 2px solid gray;
+  border-top: 2px solid #cdf7d3;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin .7s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

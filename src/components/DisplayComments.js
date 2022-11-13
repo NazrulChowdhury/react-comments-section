@@ -4,10 +4,12 @@ import InputField from './InputField'
 import { ActionContext } from './ActionContext'
 // import 'reactjs-popup/dist/index.css'
 import CommentStructure from './CommentStructure'
+import LoadReply from './LoadReply'
 // import '../popup.css'
-const DisplayComments = ({ comments }) => {
+const DisplayComments = ({ comments, showReplyLoader }) => {
   const actions = useContext(ActionContext)
   const [showRepliesCommentId, setShowRepliesCommentId] = useState([])
+
   return (
     <div>
       {comments.map((i, index) => (
@@ -41,23 +43,23 @@ const DisplayComments = ({ comments }) => {
                   onClick={()=> setShowRepliesCommentId([...showRepliesCommentId ,i.comId])}
                   style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
                 >
-                  — show {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
+                  — show {i.replyCount} {" "} {i.replyCount == 1? 'reply' : 'replies' }
                 </span>) 
                 : null
               }
               {showRepliesCommentId.length && showRepliesCommentId.find(id => id == i.comId) ?
-              (<span 
-                onClick={()=> {
-                  setShowRepliesCommentId(showRepliesCommentId.filter(id => id !== i.comId))}
-                }
-                style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
-              > {
-                  i.replies.length ? (
-                    <span>
-                      — hide {i.replies.length} {" "} {i.replies.length == 1? 'reply' : 'replies' }
-                    </span>) : null
-                }
-              </span>) : null
+                (<span 
+                  onClick={()=> {
+                    setShowRepliesCommentId(showRepliesCommentId.filter(id => id !== i.comId))}
+                  }
+                  style = {{color : 'gray', fontSize : '12px', cursor : 'pointer'}}
+                > {
+                    i.replies.length ? (
+                      <span>
+                        — hide {" "} {i.replies.length == 1? 'reply' : 'replies' }
+                      </span>) : null
+                  }
+                </span>) : null
               }
             </div>
           )}
@@ -144,6 +146,13 @@ const DisplayComments = ({ comments }) => {
                     ))}
                 </div>
               ))}
+              {
+                showRepliesCommentId.find(id => id == i.comId) ?(
+                <LoadReply 
+                  showReplyLoader = {showReplyLoader} 
+                  comment = {i}
+                />) : null
+              }
           </div>
         </div>
       ))}
