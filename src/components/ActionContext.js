@@ -111,6 +111,7 @@ export const ActionProvider = ({
           createdAt : new Date()
         }
         newList[index].replies.push(replyObj)
+        newList[index].replyCount++
         setComment(newList)
         newComment = replyObj
       } else if (parentId && !child) { // reply
@@ -135,6 +136,7 @@ export const ActionProvider = ({
         }
         newReplies.push(replyObj)
         newList[index].replies = newReplies
+        newList[index].replyCount++
         setComment(newList)
         newComment = replyObj
       }
