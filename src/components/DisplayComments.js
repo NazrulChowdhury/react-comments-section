@@ -7,7 +7,7 @@ import CommentStructure from './CommentStructure'
 import LoadReply from './LoadReply'
 import ReplyToggle from './ReplyToggle'
 // import '../popup.css'
-const DisplayComments = ({ comments, showReplyLoader }) => {
+const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
   const actions = useContext(ActionContext)
   const [showRepliesCommentId, setShowRepliesCommentId] = useState([])
 
@@ -133,14 +133,15 @@ const DisplayComments = ({ comments, showReplyLoader }) => {
                 <LoadReply 
                   showReplyLoader = {showReplyLoader} 
                   comment = {i}
+                  fetchReplies = {fetchReplies}
                 />) : null
               }
           </div>
-          <ReplyToggle 
+          {/* <ReplyToggle 
             comment = {i} showRepliesCommentId = {showRepliesCommentId}
             setShowRepliesCommentId = {setShowRepliesCommentId}
             showOption = {false}
-          />
+          /> */}
         </div>
       ))}
     </div>

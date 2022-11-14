@@ -24,7 +24,8 @@ export const CommentSection = ({
   marginTop, // accommodate some margin-top for each comment if necessary 
   sectionTop,  // margin-top of the entire comment section. zero or 1px better for individual comment card.
   sectionLeft, // entire comment section. Adjust at will for individual comment 
-  showReplyLoader
+  showReplyLoader,
+  fetchReplies
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -57,7 +58,11 @@ export const CommentSection = ({
           className={styles.displayComments}
           style = {{marginTop : sectionTop || '18px', marginLeft : sectionLeft || '38px'}}
         >
-          <DisplayComments comments={comments} showReplyLoader ={showReplyLoader} />
+          <DisplayComments 
+            comments={comments} 
+            fetchReplies = {fetchReplies}
+            showReplyLoader ={showReplyLoader} 
+          />
         </div>
       </div>
     </ActionProvider>
