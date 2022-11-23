@@ -8,6 +8,8 @@ import Input from './components/Input'
 export const CommentSection = ({
   commentsArray,
   currentUser,
+  userDocument, 
+  setUserDocument,
   bookId,
   setComment,
   signinUrl,
@@ -19,13 +21,15 @@ export const CommentSection = ({
   handleEdit,
   handleDelete,
   commentLimit,
+  handleFollow,
   CommentMain, // if true then main-comment-input section will be rendered.
   bucketUrl, // avatar image bucket address
   marginTop, // accommodate some margin-top for each comment if necessary 
   sectionTop,  // margin-top of the entire comment section. zero or 1px better for individual comment card.
   sectionLeft, // entire comment section. Adjust at will for individual comment 
   showReplyLoader,
-  fetchReplies
+  fetchReplies,
+  onOpen 
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -35,6 +39,8 @@ export const CommentSection = ({
   return (
     <ActionProvider
       currentUser={currentUser}
+      userDocument = {userDocument}
+      setUserDocument = {setUserDocument}
       bookId = {bookId}
       setComment={setComment}
       comments={comments}
@@ -46,9 +52,11 @@ export const CommentSection = ({
       handleComment = {handleComment}
       handleEdit = {handleEdit}
       handleDelete = {handleDelete}
+      handleFollow = {handleFollow}
       commentLimit = {commentLimit}
       bucketUrl = {bucketUrl}
       marginTop = {marginTop} // to create gap between two comments. not between replies.
+      onOpen = {onOpen}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>

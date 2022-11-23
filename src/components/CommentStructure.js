@@ -19,6 +19,7 @@ import {
 } from './ModalStyles'
 import { ActionContext } from './ActionContext'
 import { toShortFormat } from '../functions'
+import ProfilePopUp from './ProfilePopUp'
 
 const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
@@ -34,23 +35,28 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         style={reply ? { marginLeft: 15, marginTop: '6px' } : {marginTop : '0px'}}
       >
 
-        {/* avatar/Name/Button flex-row */}
-        <div className={styles.commentsTwo}>
-           {/* avatar */}
-          <div>
-              <img
-                src = {`${actions.bucketUrl}/${i.userId}.jpeg?`}
-                style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
-                alt='userIcon'
-                onError={(e) => {
-                  e.target.onerror = null; // prevents looping
-                  e.target.src =`${actions.bucketUrl}/noImage.png`
-                }}
-              />           
-          </div> 
-            {/* fullName */}
-          <div className={styles.fullName}>{i.fullName} </div>
-        </div>
+        <ProfilePopUp
+          otherUserId = {i.userId}
+          name = {i.fullName}
+        >
+          {/* avatar/Name/Button flex-row */}
+          <div className={styles.commentsTwo}>
+            {/* avatar */}
+            <div>
+                <img
+                  src = {`${actions.bucketUrl}/${i.userId}.jpeg?`}
+                  style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
+                  alt='userIcon'
+                  onError={(e) => {
+                    e.target.onerror = null; // prevents looping
+                    e.target.src =`${actions.bucketUrl}/noImage.png`
+                  }}
+                />           
+            </div> 
+              {/* fullName */}
+            <div className={styles.fullName}>{i.fullName} </div>
+          </div>
+        </ProfilePopUp>
         {replyTargetName && 
         <div style={{fontSize : '12px', color : 'gray', marginBottom : '5px'}}>
           replying to{<b>{' '+replyTargetName}</b>} 

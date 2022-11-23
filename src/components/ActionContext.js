@@ -6,6 +6,8 @@ export const ActionContext = createContext()
 export const ActionProvider = ({
   children,
   currentUser,
+  userDocument,
+  setUserDocument,
   bookId,
   setComment,
   comments,
@@ -17,9 +19,11 @@ export const ActionProvider = ({
   handleComment,
   handleEdit,
   handleDelete,
+  handleFollow,
   commentLimit,
   marginTop, 
-  bucketUrl
+  bucketUrl,
+  onOpen // triggers custom modal to open
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -206,15 +210,19 @@ export const ActionProvider = ({
         editArr: editArr,
         onEdit: editText,
         onDelete: deleteText,
+        handleFollow : handleFollow,
         signinUrl: signinUrl,
         signupUrl: signupUrl,
         signInFunc : signInFunc,
         user: user,
+        userDocument : userDocument,
+        setUserDocument : setUserDocument,
         customInput: customInput,
         submit: submit,
         commentLimit : commentLimit,
         marginTop :marginTop,
-        bucketUrl : bucketUrl
+        bucketUrl : bucketUrl,
+        onOpen : onOpen
       }}
     >
       {children}
