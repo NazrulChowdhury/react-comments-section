@@ -25,7 +25,8 @@ export const ActionProvider = ({
   bucketUrl,
   onOpen, 
   setFollowModalUserData,
-  getProfile 
+  getProfile,
+  followUserData 
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -226,7 +227,8 @@ export const ActionProvider = ({
         bucketUrl : bucketUrl,
         onOpen : onOpen,
         setFollowModalUserData : setFollowModalUserData,
-        getProfile : getProfile
+        getProfile : getProfile,
+        followUserData : followUserData
       }}
     >
       {children}

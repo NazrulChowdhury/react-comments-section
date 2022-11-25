@@ -31,7 +31,8 @@ export const CommentSection = ({
   fetchReplies,
   onOpen, // triggers custom modal to open
   setFollowModalUserData,
-  getProfile 
+  getProfile,
+  followUserData 
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -61,6 +62,7 @@ export const CommentSection = ({
       onOpen = {onOpen}
       setFollowModalUserData = {setFollowModalUserData}
       getProfile = {getProfile}
+      followUserData = {followUserData} // user obj array with follow counts
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>

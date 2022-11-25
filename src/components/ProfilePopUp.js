@@ -10,10 +10,11 @@ const ProfilePopUp = ({
   const {
     bucketUrl, signInFunc, handleFollow, getProfile, 
     userDocument, setUserDocument,
-    onOpen, setFollowModalUserData
+    onOpen, setFollowModalUserData, followUserData
   } = useContext(ActionContext) 
   const [hover, setHover] = useState(false)
-  const [following, setFollowing] = useState(undefined)
+  const [following, setFollowing] = useState(undefined) // if you are following or not
+  const [followData, setFollowData] = useState(undefined) // following and followers count
 
   const  handleMouseEnter = ()=> setHover(true)
   const handleMouseLeave = () => setHover(false)
@@ -21,67 +22,90 @@ const ProfilePopUp = ({
   useEffect(() => {
     setFollowing(userDocument?.followingIds?.find(id => { return id === otherUserId}))
   },[userDocument])
-
+  useEffect(() => {
+    setFollowData(followUserData.find(user => {return user.userId === otherUserId}))
+  },[followUserData])
+console.log('follow data from comment section', followData )
   return (
     <div className = {styles.tooltip}>
       {children}
       <div className = {styles.tooltipProfile}>
-        <div style={{display:'flex', justifyContent : 'space-evenly', alignItems:'center'}}>
+        <div style={{display:'flex', justifyContent : 'space-between', alignItems:'center'}}>
           <img
             src = {`${bucketUrl}/${otherUserId}.jpeg?`}
-            style={{ width: 60, height: 60, borderRadius: 60 / 2, cursor:'pointer' }}
+            style={{ width: 60, height: 60, borderRadius: 60 / 2, cursor:'pointer', marginLeft:'10px', marginTop : '5px' }}
             alt='userIcon'
             onError={(e) => {
               e.target.onerror = null; // prevents looping
               e.target.src =`${bucketUrl}/noImage.png`
             }}
             onClick = {() => getProfile(otherUserId)}
-          /> 
-          { following &&
-            <button
-              className={styles.standardBtn}
-              style = {{ color : hover ? 'red' : 'teal'}}
-              onMouseEnter={handleMouseEnter} 
-              onMouseLeave={handleMouseLeave}
-              onClick = {() => {
-                setFollowModalUserData({
-                  name ,
-                  userId : otherUserId
-                })
-                onOpen()
-              }}
-            >
-              {hover ? `Unfollow` : 'Following' }
-            </button>
+          />
+          <div style={{marginRight : '15px'}}> 
+            { following &&
+              <button
+                className={styles.standardBtn}
+                style = {{ color : hover ? 'red' : 'teal'}}
+                onMouseEnter={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave}
+                onClick = {() => {
+                  setFollowModalUserData({
+                    name ,
+                    userId : otherUserId
+                  })
+                  onOpen()
+                }}
+              >
+                {hover ? `Unfollow` : 'Following' }
+              </button>
+            }
+          
+            { !following &&
+              <button
+                className={styles.standardBtn}
+                onClick = {() => {
+                  if(!userDocument){
+                    signInFunc()
+                    return
+                  }
+                  handleFollow( userDocument.userId, otherUserId, 'follow')
+                  setUserDocument({
+                    ...userDocument,
+                    followingIds : [...userDocument.followingIds, otherUserId]
+                  })
+                }}
+              >
+                Follow
+              </button>
+            } 
+          </div>         
+        </div>
+        <div style={{marginLeft : '10px', display:'flex', flexDirection:'column'}}>
+          <span
+            onClick = {() => getProfile(otherUserId)}
+          >
+            <b>{name}</b>
+          </span>
+          {userDocument?.followersIds.find(id => {return id === otherUserId}) ? (
+          <span style={{fontSize : '10px',width:'60px', textAlign:'center', border : '1px solid white',marginTop:'5px'}}>
+            Follows you
+          </span>) : null
           }
-          { !following &&
-            <button
-              className={styles.standardBtn}
-              onClick = {() => {
-                if(!userDocument){
-                  signInFunc()
-                  return
-                }
-                handleFollow( userDocument.userId, otherUserId, 'follow')
-                setUserDocument({
-                  ...userDocument,
-                  followingIds : [...userDocument.followingIds, otherUserId]
-                })
-              }}
-            >
-              Follow
-            </button>
-          }          
+          <div style={{display:'flex', marginTop:'5px',fontSize : '13px'}}>
+            <div className = {styles.underline}>
+              <div >
+                <b>{followData && followData.following}</b>
+              </div>
+              <span style={{marginLeft : '2px', marginRight : '10px'}}>following</span>
+            </div>
+            <div className = {styles.underline}>
+              <div>
+                <b>{followData && followData.followers}</b>
+              </div>
+              <span style={{marginLeft : '2px'}}>followers</span>
+            </div>
+          </div>
         </div>
-        <div
-          onClick = {() => getProfile(otherUserId)}
-        >
-          {name}
-        </div>
-        <div>
-          {userDocument?.followersIds.find(id => {return id === otherUserId}) ? 'Follows you' : null}
-        </div>
-        <div></div>
       </div>
     </div>
   )

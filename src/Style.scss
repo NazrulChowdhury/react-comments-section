@@ -295,9 +295,9 @@
   visibility: hidden;
   width: 250px;
   height: 150px;
-  background-color: rgba(0,0,0, 0.7);
+  background-color: rgba(0,0,0, 0.9);
   color: #fff;
-  text-align: center;
+  // text-align: center;
   border-radius: 20px;
   padding: 5px 0;
 
@@ -329,4 +329,11 @@ height: 40px;
 transition: all 0.5s;
 cursor: pointer; */
 /*margin: 5px;*/
+}
+.underline{
+  display:flex;
+}
+.underline:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
