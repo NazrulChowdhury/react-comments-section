@@ -23,7 +23,9 @@ export const ActionProvider = ({
   commentLimit,
   marginTop, 
   bucketUrl,
-  onOpen // triggers custom modal to open
+  onOpen, 
+  setFollowModalUserData,
+  getProfile 
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -222,7 +224,9 @@ export const ActionProvider = ({
         commentLimit : commentLimit,
         marginTop :marginTop,
         bucketUrl : bucketUrl,
-        onOpen : onOpen
+        onOpen : onOpen,
+        setFollowModalUserData : setFollowModalUserData,
+        getProfile : getProfile
       }}
     >
       {children}

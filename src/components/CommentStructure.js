@@ -40,7 +40,10 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
           name = {i.fullName}
         >
           {/* avatar/Name/Button flex-row */}
-          <div className={styles.commentsTwo}>
+          <div 
+            className={styles.commentsTwo}
+            style = {{cursor: 'pointer'}}
+          >
             {/* avatar */}
             <div>
                 <img
@@ -51,10 +54,16 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                     e.target.onerror = null; // prevents looping
                     e.target.src =`${actions.bucketUrl}/noImage.png`
                   }}
+                  onClick = {() => actions.getProfile(i.userId)}
                 />           
             </div> 
               {/* fullName */}
-            <div className={styles.fullName}>{i.fullName} </div>
+            <div 
+              className={styles.fullName}
+              onClick = {() => actions.getProfile(i.userId)}
+            >
+              {i.fullName} 
+            </div>
           </div>
         </ProfilePopUp>
         {replyTargetName && 

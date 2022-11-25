@@ -29,7 +29,9 @@ export const CommentSection = ({
   sectionLeft, // entire comment section. Adjust at will for individual comment 
   showReplyLoader,
   fetchReplies,
-  onOpen 
+  onOpen, // triggers custom modal to open
+  setFollowModalUserData,
+  getProfile 
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -57,6 +59,8 @@ export const CommentSection = ({
       bucketUrl = {bucketUrl}
       marginTop = {marginTop} // to create gap between two comments. not between replies.
       onOpen = {onOpen}
+      setFollowModalUserData = {setFollowModalUserData}
+      getProfile = {getProfile}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
