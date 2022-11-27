@@ -98,7 +98,8 @@ export const ActionProvider = ({
           likeCount: 0,
           likersId: [],
           createdAt : new Date(),
-          edited : false
+          edited : false,
+          replyCount : 0
         }
         setComment([commentObject, ...comments])
         newComment = commentObject
@@ -140,7 +141,8 @@ export const ActionProvider = ({
           likersId: [],
           replyTargetName : replyTargetName,
           replyTargetUserId : targetUserId,
-          createdAt : new Date()
+          createdAt : new Date(),
+         // justPosted : true
         }
         newReplies.push(replyObj)
         newList[index].replies = newReplies
@@ -236,4 +238,15 @@ export const ActionProvider = ({
       {children}
     </ActionContext.Provider>
   )
+}
+
+function filterOutField(obj, field){
+  return Object.keys(obj)
+   .filter(key => key !== field)
+   .reduce((acc, key) => {
+     return {
+       ...acc,
+       [key]: obj[key]
+     };
+   }, {})
 }
