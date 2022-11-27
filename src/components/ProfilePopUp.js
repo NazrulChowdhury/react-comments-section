@@ -10,7 +10,8 @@ const ProfilePopUp = ({
   const {
     bucketUrl, signInFunc, handleFollow, getProfile, 
     userDocument, setUserDocument,
-    onOpen, setFollowModalUserData, followUserData
+    onOpen, setFollowModalUserData, 
+    followUserData, setFollowUserData
   } = useContext(ActionContext) 
   const [hover, setHover] = useState(false)
   const [following, setFollowing] = useState(undefined) // if you are following or not
@@ -25,7 +26,7 @@ const ProfilePopUp = ({
   useEffect(() => {
     setFollowData(followUserData.find(user => {return user.userId === otherUserId}))
   },[followUserData])
-console.log('follow data from comment section', followData )
+
   return (
     <div className = {styles.tooltip}>
       {children}
@@ -72,7 +73,17 @@ console.log('follow data from comment section', followData )
                   setUserDocument({
                     ...userDocument,
                     followingIds : [...userDocument.followingIds, otherUserId]
-                  })
+                  })                 
+                  const updatedFollowUserData = followUserData.map(user =>{
+                    if(user.userId !== otherUserId){ 
+                      return user
+                    }
+                    return {
+                      ...user,
+                      followers : user.followers + 1
+                    }
+                  } )
+                  setFollowUserData(updatedFollowUserData)
                 }}
               >
                 Follow

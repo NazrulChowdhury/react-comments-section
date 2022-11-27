@@ -11,7 +11,7 @@ export const CommentSection = ({
   userDocument, 
   setUserDocument,
   bookId,
-  setComment,
+  setComment, // only for bookComment section. not for comment cards
   signinUrl,
   signupUrl,
   signInFunc,
@@ -32,7 +32,8 @@ export const CommentSection = ({
   onOpen, // triggers custom modal to open
   setFollowModalUserData,
   getProfile,
-  followUserData 
+  followUserData,
+  setFollowUserData 
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -62,7 +63,8 @@ export const CommentSection = ({
       onOpen = {onOpen}
       setFollowModalUserData = {setFollowModalUserData}
       getProfile = {getProfile}
-      followUserData = {followUserData} // user obj array with follow counts
+      followUserData = {followUserData} // user obj array with follower counts
+      setFollowUserData = {setFollowUserData}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
