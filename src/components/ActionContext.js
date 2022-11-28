@@ -117,12 +117,13 @@ export const ActionProvider = ({
           likersId: [],
           replyTargetName : replyTargetName,
           replyTargetUserId : targetUserId,
-          createdAt : new Date()
+          createdAt : new Date(),
+          justPosted : true // check LoadReply.js for explanation of this field. 
         }
         newList[index].replies.push(replyObj)
         newList[index].replyCount++
         setComment(newList)
-        newComment = replyObj
+        newComment = filterOutField(replyObj, 'justPosted')
       } else if (parentId && !child) { // reply
         const newList = [...comments]
         const index = newList.findIndex((x) => x.comId === parentId)
@@ -142,13 +143,13 @@ export const ActionProvider = ({
           replyTargetName : replyTargetName,
           replyTargetUserId : targetUserId,
           createdAt : new Date(),
-         // justPosted : true
+          justPosted : true // check LoadReply.js for explanation of this field. 
         }
         newReplies.push(replyObj)
         newList[index].replies = newReplies
         newList[index].replyCount++
         setComment(newList)
-        newComment = replyObj
+        newComment = filterOutField(replyObj, 'justPosted')
       }
       // post to backend
       handleComment(userId, parentId, targetUserId, targetCommentId, replyTargetName, newComment)
