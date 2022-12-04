@@ -40,31 +40,38 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
           name = {i.fullName}
         >
           {/* avatar/Name/Button flex-row */}
-          <div 
+          <a 
+            href = {`/userProfile/${i.userId}`}
             className={styles.commentsTwo}
-            style = {{cursor: 'pointer'}}
+            style = {{cursor: 'pointer', textDecoration : 'none'}}
           >
             {/* avatar */}
-            <div>
-                <img
-                  src = {`${actions.bucketUrl}/${i.userId}.jpeg?`}
-                  style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
-                  alt='userIcon'
-                  onError={(e) => {
-                    e.target.onerror = null; // prevents looping
-                    e.target.src =`${actions.bucketUrl}/noImage.png`
-                  }}
-                  onClick = {() => actions.getProfile(i.userId)}
-                />           
-            </div> 
+            <img
+              src = {`${actions.bucketUrl}/${i.userId}.jpeg?`}
+              style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
+              alt='userIcon'
+              onError={(e) => {
+                e.target.onerror = null; // prevents looping
+                e.target.src =`${actions.bucketUrl}/noImage.png`
+              }}
+              onClick = {(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                actions.getProfile(i.userId)
+              }}
+            />           
               {/* fullName */}
             <div 
               className={styles.fullName}
-              onClick = {() => actions.getProfile(i.userId)}
+              onClick = {(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                actions.getProfile(i.userId)
+              }}
             >
               {i.fullName} 
             </div>
-          </div>
+          </a>
         </ProfilePopUp>
         {replyTargetName && 
         <div style={{fontSize : '12px', color : 'gray', marginBottom : '5px'}}>

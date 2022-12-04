@@ -17,9 +17,14 @@ const ProfilePopUp = ({
   const [hover, setHover] = useState(false)
   const [following, setFollowing] = useState(undefined) // if you are following or not
   const [followData, setFollowData] = useState(undefined) // following and followers count
-
+  const profileUrl = `/userProfile/${otherUserId}`
   const  handleMouseEnter = ()=> setHover(true)
   const handleMouseLeave = () => setHover(false)
+  const goToProfile = (e, userId) => {
+    e.stopPropagation()
+    e.preventDefault()
+    getProfile(userId)
+  }
 
   useEffect(() => {
     setFollowing(userDocument?.followingIds?.find(id => { return id === otherUserId}))
@@ -31,18 +36,20 @@ const ProfilePopUp = ({
   return (
     <div className = {styles.tooltip}>
       {children}
-      <div className = {styles.tooltipProfile}>
+      <div className = {styles.tooltipProfile} >
         <div style={{display:'flex', justifyContent : 'space-between', alignItems:'center'}}>
-          <img
-            src = {`${bucketUrl}/${otherUserId}.jpeg?`}
-            style={{ width: 60, height: 60, borderRadius: 60 / 2, cursor:'pointer', marginLeft:'10px', marginTop : '5px' }}
-            alt='userIcon'
-            onError={(e) => {
-              e.target.onerror = null; // prevents looping
-              e.target.src =`${bucketUrl}/noImage.png`
-            }}
-            onClick = {() => getProfile(otherUserId)}
-          />
+          <a href={profileUrl}>
+            <img
+              src = {`${bucketUrl}/${otherUserId}.jpeg?`}
+              style={{ width: 60, height: 60, borderRadius: 60 / 2, cursor:'pointer', marginLeft:'10px', marginTop : '5px' }}
+              alt='userIcon'
+              onError={(e) => {
+                e.target.onerror = null; // prevents looping
+                e.target.src =`${bucketUrl}/noImage.png`
+              }}
+              onClick = {(e) => goToProfile(e, otherUserId)}
+            />
+          </a>
           <div style={{marginRight : '15px'}}> 
             { following &&
               <button
@@ -50,7 +57,9 @@ const ProfilePopUp = ({
                 style = {{ color : hover ? 'red' : 'teal'}}
                 onMouseEnter={handleMouseEnter} 
                 onMouseLeave={handleMouseLeave}
-                onClick = {() => {
+                onClick = {(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
                   setFollowModalUserData({
                     name ,
                     userId : otherUserId
@@ -65,7 +74,9 @@ const ProfilePopUp = ({
             { !following &&
               <button
                 className={styles.standardBtn}
-                onClick = {() => {
+                onClick = {(e) => {
+                  e.stopPropagation()
+                  e.preventDefault()
                   if(!userDocument){
                     signInFunc()
                     return
@@ -93,11 +104,14 @@ const ProfilePopUp = ({
           </div>         
         </div>
         <div style={{marginLeft : '10px', display:'flex', flexDirection:'column'}}>
-          <span
-            onClick = {() => getProfile(otherUserId)}
-          >
-            <b>{name}</b>
-          </span>
+          <a href={profileUrl}>
+            <span
+              onClick = {(e) => goToProfile(e, otherUserId)}
+              style = {{textDecoration : 'none'}}
+            >
+              <b>{name}</b>
+            </span>
+          </a>
           {userDocument?.followersIds.find(id => {return id === otherUserId}) ? (
           <span style={{fontSize : '10px',width:'60px', textAlign:'center', border : '1px solid white',marginTop:'5px'}}>
             Follows you
@@ -105,7 +119,9 @@ const ProfilePopUp = ({
           }
           <div style={{display:'flex', marginTop:'5px',fontSize : '13px'}}>
             <div className = {styles.underline}
-              onClick = {() => {
+              onClick = {(e) => {
+                e.stopPropagation()
+                e.preventDefault()
                 if(!userDocument){
                   signInFunc()
                   return
@@ -120,7 +136,9 @@ const ProfilePopUp = ({
               <span style={{marginLeft : '2px', marginRight : '10px'}}>following</span>
             </div>
             <div className = {styles.underline}
-              onClick = {() => {
+              onClick = {(e) => {
+                e.stopPropagation()
+                e.preventDefault()
                 if(!userDocument){
                   signInFunc()
                   return
