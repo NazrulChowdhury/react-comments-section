@@ -27,7 +27,8 @@ export const ActionProvider = ({
   setFollowModalUserData,
   getProfile,
   followUserData,
-  setFollowUserData  
+  setFollowUserData,
+  getFollowList  
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -233,7 +234,8 @@ export const ActionProvider = ({
         setFollowModalUserData : setFollowModalUserData,
         getProfile : getProfile,
         followUserData : followUserData,
-        setFollowUserData : setFollowUserData
+        setFollowUserData : setFollowUserData,
+        getFollowList : getFollowList
       }}
     >
       {children}

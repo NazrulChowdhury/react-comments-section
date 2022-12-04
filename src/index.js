@@ -33,7 +33,8 @@ export const CommentSection = ({
   setFollowModalUserData,
   getProfile,
   followUserData,
-  setFollowUserData 
+  setFollowUserData,
+  getFollowList 
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -65,6 +66,7 @@ export const CommentSection = ({
       getProfile = {getProfile}
       followUserData = {followUserData} // user obj array with follower counts
       setFollowUserData = {setFollowUserData}
+      getFollowList = {getFollowList}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>

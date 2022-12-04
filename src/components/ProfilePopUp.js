@@ -11,7 +11,8 @@ const ProfilePopUp = ({
     bucketUrl, signInFunc, handleFollow, getProfile, 
     userDocument, setUserDocument,
     onOpen, setFollowModalUserData, 
-    followUserData, setFollowUserData
+    followUserData, setFollowUserData,
+    getFollowList
   } = useContext(ActionContext) 
   const [hover, setHover] = useState(false)
   const [following, setFollowing] = useState(undefined) // if you are following or not
@@ -103,13 +104,31 @@ const ProfilePopUp = ({
           </span>) : null
           }
           <div style={{display:'flex', marginTop:'5px',fontSize : '13px'}}>
-            <div className = {styles.underline}>
+            <div className = {styles.underline}
+              onClick = {() => {
+                if(!userDocument){
+                  signInFunc()
+                  return
+                }
+                const nameWithDash = name.replaceAll(' ', '-')
+                getFollowList(otherUserId , nameWithDash, 'following', followData.followers, followData.following)
+              }}
+            >
               <div >
                 <b>{followData && followData.following}</b>
               </div>
               <span style={{marginLeft : '2px', marginRight : '10px'}}>following</span>
             </div>
-            <div className = {styles.underline}>
+            <div className = {styles.underline}
+              onClick = {() => {
+                if(!userDocument){
+                  signInFunc()
+                  return
+                }
+                const nameWithDash = name.replaceAll(' ', '-')
+                getFollowList(otherUserId , nameWithDash, 'followers', followData.followers, followData.following)
+              }}
+            >
               <div>
                 <b>{followData && followData.followers}</b>
               </div>
