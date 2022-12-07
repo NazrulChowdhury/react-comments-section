@@ -12,12 +12,12 @@ const ProfilePopUp = ({
     userDocument, setUserDocument,
     onOpen, setFollowModalUserData, 
     followUserData, setFollowUserData,
-    getFollowList
+    getFollowList, userId,
   } = useContext(ActionContext) 
   const [hover, setHover] = useState(false)
   const [following, setFollowing] = useState(undefined) // if you are following or not
   const [followData, setFollowData] = useState(undefined) // following and followers count
-  const profileUrl = `/userProfile/${otherUserId}`
+  const otherUserprofileUrl = `/userProfile/${otherUserId}`
   const  handleMouseEnter = ()=> setHover(true)
   const handleMouseLeave = () => setHover(false)
   const goToProfile = (e, userId) => {
@@ -38,7 +38,7 @@ const ProfilePopUp = ({
       {children}
       <div className = {styles.tooltipProfile} >
         <div style={{display:'flex', justifyContent : 'space-between', alignItems:'center'}}>
-          <a href={profileUrl}>
+          <a href={userId && userId === otherUserId ? '/profile' : otherUserprofileUrl}>
             <img
               src = {`${bucketUrl}/${otherUserId}.jpeg?`}
               style={{ width: 60, height: 60, borderRadius: 60 / 2, cursor:'pointer', marginLeft:'10px', marginTop : '5px' }}
@@ -104,7 +104,7 @@ const ProfilePopUp = ({
           </div>         
         </div>
         <div style={{marginLeft : '10px', display:'flex', flexDirection:'column'}}>
-          <a href={profileUrl}>
+          <a href={userId && userId === otherUserId ? '/profile' : otherUserprofileUrl}>
             <span
               onClick = {(e) => goToProfile(e, otherUserId)}
               style = {{textDecoration : 'none'}}

@@ -41,7 +41,9 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         >
           {/* avatar/Name/Button flex-row */}
           <a 
-            href = {`/userProfile/${i.userId}`}
+            href={actions.userId && actions.userId === i.userId ? '/profile' : 
+              `/userProfile/${i.userId}`
+            } 
             className={styles.commentsTwo}
             style = {{cursor: 'pointer', textDecoration : 'none'}}
           >
