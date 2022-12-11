@@ -18,22 +18,13 @@ import {
   modalDelBtn
 } from './ModalStyles'
 import { ActionContext } from './ActionContext'
-import { toShortFormat } from '../functions'
+import { toShortFormat, getAvatarUrl } from '../functions'
 import ProfilePopUp from './ProfilePopUp'
 
 const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
   const edit = true
   const marginTop = actions.marginTop? actions.marginTop : '16px'
-  const getAvatarUrl = (appUserID, AppUserImg, commentUserId, commentUserAvatarNum)=>{
-    if(appUserID && appUserID === commentUserId){
-      const url = AppUserImg ? AppUserImg : `${actions.bucketUrl}/noImage.png`
-      return url
-    }
-    const url = commentUserAvatarNum ? `${actions.bucketUrl}/${commentUserId}.jpeg?${commentUserAvatarNum}`
-    : `${actions.bucketUrl}/noImage.png`
-    return url
-  }
 
   return (
     <div 
@@ -48,6 +39,9 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         <ProfilePopUp
           otherUserId = {i.userId}
           name = {i.fullName}
+          avatarUrl = {
+            getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum, actions.bucketUrl)
+          }
         >
           {/* avatar/Name/Button flex-row */}
           <a 
@@ -59,7 +53,9 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
           >
             {/* avatar */}
             <img
-              src = {getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum)} 
+              src = {
+                getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum, actions.bucketUrl)
+              } 
               style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
               alt='userIcon'
               onError={(e) => {

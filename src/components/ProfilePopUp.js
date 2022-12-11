@@ -4,6 +4,7 @@ import { ActionContext } from './ActionContext'
 
 const ProfilePopUp = ({
   otherUserId,
+  avatarUrl,
   name,
   children
 }) => {
@@ -40,13 +41,9 @@ const ProfilePopUp = ({
         <div style={{display:'flex', justifyContent : 'space-between', alignItems:'center'}}>
           <a href={userId && userId === otherUserId ? '/profile' : otherUserprofileUrl}>
             <img
-              src = {`${bucketUrl}/${otherUserId}.jpeg?`}
+              src = {avatarUrl}
               style={{ width: 60, height: 60, borderRadius: 60 / 2, cursor:'pointer', marginLeft:'10px', marginTop : '5px' }}
               alt='userIcon'
-              onError={(e) => {
-                e.target.onerror = null; // prevents looping
-                e.target.src =`${bucketUrl}/noImage.png`
-              }}
               onClick = {(e) => goToProfile(e, otherUserId)}
             />
           </a>

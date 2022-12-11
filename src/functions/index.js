@@ -15,3 +15,15 @@ export const toShortFormat = (date) => {
     return `${day}-${monthName}-${year}`;
 
 }
+
+export const getAvatarUrl = (
+  appUserID, AppUserImg, commentUserId, commentUserAvatarNum, bucketUrl
+  ) => {
+  if(appUserID && appUserID === commentUserId){
+    const url = AppUserImg ? AppUserImg : `${bucketUrl}/noImage.png`
+    return url
+  }
+  const url = commentUserAvatarNum ? `${bucketUrl}/${commentUserId}.jpeg?${commentUserAvatarNum}`
+  : `${bucketUrl}/noImage.png`
+  return url
+}
