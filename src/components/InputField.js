@@ -7,7 +7,7 @@ import * as yup from "yup"
 
 const InputField = ({ 
   cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId, 
-  marginTop, marginRight, marginBottom
+  marginTop, marginRight, marginBottom, authorImg
 }) => {
   const actions = useContext(ActionContext)
   const schema = yup.object({
@@ -48,13 +48,9 @@ const InputField = ({
     >
       <div className={styles.userImg}>
       <img
-          src = {`${actions.bucketUrl}/${actions.userId}.jpeg?`}
+          src = {authorImg} 
           style={{ width: 38, height: 38, borderRadius: 38 / 2 }}
           alt='userIcon'
-          onError={(e) => {
-            e.target.onerror = null; // prevents looping
-            e.target.src =`${actions.bucketUrl}/noImage.png`
-          }}
         /> 
       </div>
       <input 
