@@ -25,6 +25,16 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
   const edit = true
   const marginTop = actions.marginTop? actions.marginTop : '16px'
+  const getAvatarUrl = (appUserID, AppUserImg, commentUserId, commentUserAvatarNum)=>{
+    if(appUserID && appUserID === commentUserId){
+      const url = AppUserImg ? AppUserImg : `${actions.bucketUrl}/noImage.png`
+      return url
+    }
+    const url = commentUserAvatarNum ? `${actions.bucketUrl}/${commentUserId}.jpeg?${commentUserAvatarNum}`
+    : `${actions.bucketUrl}/noImage.png`
+    return url
+  }
+
   return (
     <div 
       className={styles.halfDiv}
@@ -49,7 +59,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
           >
             {/* avatar */}
             <img
-              src = {`${actions.bucketUrl}/${i.userId}.jpeg?`}
+              src = {getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum)} 
               style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
               alt='userIcon'
               onError={(e) => {
@@ -217,3 +227,4 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
 }
 
 export default CommentStructure
+

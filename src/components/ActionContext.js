@@ -93,7 +93,6 @@ export const ActionProvider = ({
           userId: currentUser.userId,
           bookId,
           comId: uuid(),
-          avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
           text: text,
           likeCount: 0,
@@ -111,7 +110,6 @@ export const ActionProvider = ({
           userId: currentUser.userId,
           bookId,
           comId: uuid(),
-          avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
           text: text,
           likeCount: 0,
@@ -136,7 +134,6 @@ export const ActionProvider = ({
           userId: currentUser.userId,
           bookId,
           comId: uuid(),
-          avatarUrl: currentUser.avatarUrl,
           fullName: currentUser.name,
           text: text,
           likeCount: 0,
@@ -207,7 +204,7 @@ export const ActionProvider = ({
     <ActionContext.Provider
       value={{
         onSubmit: onSubmit,
-        userImg: currentUser && currentUser.avatarUrl,
+        userImg: currentUser && currentUser.image,
         userId: currentUser && currentUser.userId,
         handleAction: handleAction,
         handleCancel: handleCancel,
