@@ -12,7 +12,7 @@ const Input = () => {
       submit: action.submit
     })
   ) : (
-    <InputField authorImg={action.userImg} main /> 
+    <InputField  main /> 
   )
 }
 

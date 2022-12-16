@@ -7,7 +7,7 @@ import * as yup from "yup"
 
 const InputField = ({ 
   cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId, 
-  marginTop, marginRight, marginBottom, authorImg
+  marginTop, marginRight, marginBottom
 }) => {
   const actions = useContext(ActionContext)
   const schema = yup.object({
@@ -48,7 +48,7 @@ const InputField = ({
     >
       <div className={styles.userImg}>
       <img
-          src = {authorImg} 
+          src = {actions.userImg ? actions.userImg : `${actions.bucketUrl}/noImage.png`} 
           style={{ width: 38, height: 38, borderRadius: 38 / 2 }}
           alt='userIcon'
         /> 
