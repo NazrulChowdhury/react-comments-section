@@ -70,7 +70,13 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
           <div className={styles.replySection}>
             {i.replies && 
               i.replies.map((a, index) => (
-                <div key={a.comId}>
+                <div 
+                  key={a.comId} 
+                  className = {
+                    showRepliesCommentId.length && showRepliesCommentId.find(id => id == i.comId) ? styles.replyBlocks
+                    : null
+                  }
+                >
                   {actions.editArr.filter((id) => id === a.comId).length !==
                   0 ? (
                     actions.customInput ? (
