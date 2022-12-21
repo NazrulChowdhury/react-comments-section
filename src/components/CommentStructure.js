@@ -114,7 +114,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                   if(actions.userId && i.likersId.find(id => id == actions.userId)){
                     actions.unlikeTrigger(i.comId, parentId)
                   } else{                 
-                    actions.likeTrigger(i.comId, parentId, i.userId)
+                    actions.likeTrigger(i.comId, parentId, i.userId, i.text)
                   }
                 }}
               >

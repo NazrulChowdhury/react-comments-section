@@ -42,7 +42,7 @@ export const ActionProvider = ({
     } else {
       setUser(false)
     }
-  })
+  },[currentUser])
 
   const handleAction = (comId, edit) => {
     if(!user){
@@ -55,7 +55,7 @@ export const ActionProvider = ({
     )
   }
 
-  const likeTrigger = (comId,parentId,targetUserId) => {
+  const likeTrigger = (comId, parentId, targetUserId, text) => {
     if(!user){
       signInFunc()
       return
@@ -63,7 +63,7 @@ export const ActionProvider = ({
     const newComments = processLike(userId, comId, parentId, comments, 'like')
     setComment(newComments)
     // post to the backend
-    handleLike(userId,'like', comId, parentId, targetUserId)
+    handleLike(userId,'like', comId, parentId, targetUserId, text)
   }
 
   const unlikeTrigger = (comId,parentId) =>{
@@ -188,7 +188,10 @@ export const ActionProvider = ({
     handleDelete(userId, parentId, id) 
   }
 
-  const submit = (cancellor, text, parentId, edit, setText,targetUserId, targetCommentId,replyTargetName, child) => {
+  const submit = (
+    cancellor, text, parentId, edit, setText,targetUserId, 
+    targetCommentId,replyTargetName, child
+  ) => {
     if (edit) {
       editText(cancellor, text, parentId, targetCommentId)
       handleCancel(cancellor, edit)
