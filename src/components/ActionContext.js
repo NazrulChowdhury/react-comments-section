@@ -85,7 +85,9 @@ export const ActionProvider = ({
     }
   }
 
-  const onSubmit = (text, parentId, child, targetUserId, targetCommentId, replyTargetName) => {
+  const onSubmit = (
+    text, parentId, child, targetUserId, targetCommentId, replyTargetName
+  ) => {
     let newComment = ''
     if (text.length > 0) {
       if (!parentId && !child) { // comment
@@ -116,6 +118,7 @@ export const ActionProvider = ({
           likersId: [],
           replyTargetName : replyTargetName,
           replyTargetUserId : targetUserId,
+          targetComId : targetCommentId,
           createdAt : new Date(),
           justPosted : true // check LoadReply.js for explanation of this field. 
         }
@@ -140,6 +143,7 @@ export const ActionProvider = ({
           likersId: [],
           replyTargetName : replyTargetName,
           replyTargetUserId : targetUserId,
+          targetComId : targetCommentId,
           createdAt : new Date(),
           justPosted : true // check LoadReply.js for explanation of this field. 
         }
