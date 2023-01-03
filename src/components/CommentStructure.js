@@ -65,7 +65,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               onClick = {(e) => {
                 e.stopPropagation()
                 e.preventDefault()
-                actions.getProfile(i.userId)
+                actions.getProfile(i.userId, actions.userDocument)
               }}
             />           
               {/* fullName */}
@@ -74,7 +74,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               onClick = {(e) => {
                 e.stopPropagation()
                 e.preventDefault()
-                actions.getProfile(i.userId)
+                actions.getProfile(i.userId, actions.userDocument)
               }}
             >
               {i.fullName} 

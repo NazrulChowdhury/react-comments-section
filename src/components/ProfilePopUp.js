@@ -24,7 +24,11 @@ const ProfilePopUp = ({
   const goToProfile = (e, userId) => {
     e.stopPropagation()
     e.preventDefault()
-    getProfile(userId)
+    if(!userDocument){
+      signInFunc()
+      return
+    }
+    getProfile(userId, userDocument)
   }
 
   useEffect(() => {
