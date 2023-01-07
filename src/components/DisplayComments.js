@@ -6,6 +6,7 @@ import { ActionContext } from './ActionContext'
 import CommentStructure from './CommentStructure'
 import LoadReply from './LoadReply'
 import ReplyToggle from './ReplyToggle'
+import DeletedComment from './DeletedComment'
 // import '../popup.css'
 const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
   const actions = useContext(ActionContext)
@@ -14,6 +15,7 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
   return (
     <div>
       {comments.map((i, index) => (
+        !i ? <DeletedComment type = 'comment' /> : // only render the rest if comment has not been deleted.
         <div key={i.comId}>
           {actions.editArr.filter((id) => id === i.comId).length !== 0 ? (
             actions.customInput ? (
@@ -23,19 +25,18 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
                 handleCancel: actions.handleCancel,
                 submit: actions.submit,
                 edit: true
-              })
-            ) : (
-              <InputField 
-              cancellor={i.comId} 
-              value={i.text} 
-              edit 
-              targetCommentId = {i.comId}
-              marginTop = '5px'
-              marginBottom = '5px'
-              marginRight = '5px'
-              />
-            )
-          ) : (
+              })) : (
+                <InputField 
+                  cancellor={i.comId} 
+                  value={i.text} 
+                  edit 
+                  targetCommentId = {i.comId}
+                  marginTop = '5px'
+                  marginBottom = '5px'
+                  marginRight = '5px'
+                />
+              )
+          ) : ( 
             <div> 
               <CommentStructure i={i} handleEdit={() => actions.handleAction} />
               <ReplyToggle 
@@ -70,6 +71,7 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
           <div className={styles.replySection}>
             {i.replies && 
               i.replies.map((a, index) => (
+                !a ? <DeletedComment type = 'reply' /> : // only render if reply is not deleted.
                 <div 
                   key={a.comId} 
                   className = {

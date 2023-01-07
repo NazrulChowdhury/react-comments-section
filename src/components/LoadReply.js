@@ -3,7 +3,7 @@ import Spinner from './Spinner'
 
 const LoadReply = ({showReplyLoader, comment, fetchReplies}) => {
     const recentlyPostedReplies = comment.replies.reduce((acc, reply) => {
-        reply.justPosted &&  ++acc
+        reply?.justPosted &&  ++acc // acc is a number of new posted replies.
         return acc
     },0)
     return (
