@@ -179,15 +179,16 @@ export const ActionProvider = ({
   }
 
   const deleteText = (id, parentId) => {
-    if (parentId === undefined) {
+    if (parentId === undefined) { // delete comment
       const newList = [...comments]
       const filter = newList.filter((x) => x.comId !== id)
       setComment(filter)
-    } else if (parentId !== undefined) {
+    } else if (parentId !== undefined) { // delete reply
       const newList = [...comments]
       const index = newList.findIndex((x) => x.comId === parentId)
       const filter = newList[index].replies.filter((x) => x.comId !== id)
       newList[index].replies = filter
+      newList[index].replyCount--
       setComment(newList)
     }
     handleDelete(userId, parentId, id) 
