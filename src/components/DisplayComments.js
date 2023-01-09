@@ -7,6 +7,7 @@ import CommentStructure from './CommentStructure'
 import LoadReply from './LoadReply'
 import ReplyToggle from './ReplyToggle'
 import DeletedComment from './DeletedComment'
+import { randomNum } from '../functions'
 // import '../popup.css'
 const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
   const actions = useContext(ActionContext)
@@ -15,7 +16,12 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
   return (
     <div>
       {comments.map((i, index) => (
-        !i ? <DeletedComment type = 'comment' /> : // only render the rest if comment has not been deleted.
+        !Object.keys(i).length ? 
+          <DeletedComment 
+            type = 'comment' 
+            key = {randomNum(10000, 1000000)}
+          /> 
+        : // only render the rest if comment has not been deleted.
         <div key={i.comId}>
           {actions.editArr.filter((id) => id === i.comId).length !== 0 ? (
             actions.customInput ? (
@@ -71,7 +77,12 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
           <div className={styles.replySection}>
             {i.replies && 
               i.replies.map((a, index) => (
-                !a ? <DeletedComment type = 'reply' /> : // only render if reply is not deleted.
+                !a ? 
+                  <DeletedComment 
+                    type = 'reply' 
+                    key = {randomNum(10000, 1000000)}
+                  /> 
+                : // only render if reply is not deleted.
                 <div 
                   key={a.comId} 
                   className = {

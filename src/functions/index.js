@@ -27,3 +27,7 @@ export const getAvatarUrl = (
   : `${bucketUrl}/noImage.png`
   return url
 }
+
+export const randomNum = (min, max)=> {
+  return Math.floor(Math.random() * (max - min) + min)
+}

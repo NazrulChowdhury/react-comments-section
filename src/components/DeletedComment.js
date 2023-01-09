@@ -3,7 +3,9 @@ import styles from '../Style.scss'
 
 const DeletedComment = ({ type }) => { // type = comment | reply
   return (
-    <div className={styles.replyBlocks}>
+    <div 
+      className={type === 'reply'? styles.replyBlocks : null}
+    > 
       <div
         style={{
           background: 'lightgrey',
