@@ -6,17 +6,6 @@ import { BiEdit } from "react-icons/bi"
 import { CgEditUnmask } from "react-icons/cg";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai" 
 import { MdOutlineDeleteOutline } from "react-icons/md" 
-//import { IoOptionsOutline } from "react-icons/io5"
-
-import {
-  modal,
-  modalClose,
-  modalHeader,
-  modalContent,
-  modalActions,
-  modalActionBtn,
-  modalDelBtn
-} from './ModalStyles'
 import { ActionContext } from './ActionContext'
 import { toShortFormat, getAvatarUrl } from '../functions'
 import ProfilePopUp from './ProfilePopUp'
@@ -162,57 +151,19 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                 </button>
               </div>
               <div>
-                <Popup
-                  trigger={
-                    <button className={styles.deleteBtn}>
-                     <span> <MdOutlineDeleteOutline size = {20}/> </span>  
-                     <span>{'  '}delete</span>
-                    </button>
-                  }
-                  modal
-                  nested
+                <button 
+                  className={styles.deleteBtn}
+                  onClick={() => {
+                    actions.setDeleteModalData({
+                      parentId,
+                      targetCommentId: i.comId
+                    })
+                    actions.openDeleteModal()
+                  }}
                 >
-                  {(close) => (
-                    <div className='modal' style={modal}>
-                      <button
-                        className='close'
-                        onClick={close}
-                        style={modalClose}
-                      >
-                        &times;
-                      </button>
-                      <div className='header' style={modalHeader}>
-                        {' '}
-                        Delete Comment{' '}
-                      </div>
-                      <div className='content' style={modalContent}>
-                        {' '}
-                        Delete your comment permanently?
-                      </div>
-                      <div className='actions' style={modalActions}>
-                        <button
-                          className='button'
-                          style={modalActionBtn}
-                          onClick={() => {
-                            actions.onDelete(i.comId, parentId)
-                            close()
-                          }}
-                        >
-                          Delete
-                        </button>
-                        <button
-                          className='button'
-                          style={modalDelBtn}
-                          onClick={() => {
-                            close()
-                          }}
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </Popup>
+                  <span> <MdOutlineDeleteOutline size = {20}/> </span>  
+                  <span>{'  '}delete</span>
+                </button>
               </div>
             </div>
           </Popup>

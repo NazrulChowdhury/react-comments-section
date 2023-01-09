@@ -29,7 +29,9 @@ export const ActionProvider = ({
   followUserData,
   setFollowUserData,
   getFollowList,
-  relevantComments  
+  relevantComments,
+  openDeleteModal,
+  setDeleteModalData  
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -191,7 +193,7 @@ export const ActionProvider = ({
       newList[index].replyCount--
       setComment(newList)
     }
-    handleDelete(userId, parentId, id) 
+    handleDelete(userId, parentId, id) // call backend
   }
 
   const submit = (
@@ -242,7 +244,9 @@ export const ActionProvider = ({
         followUserData : followUserData,
         setFollowUserData : setFollowUserData,
         getFollowList : getFollowList,
-        relevantComments : relevantComments
+        relevantComments : relevantComments,
+        openDeleteModal : openDeleteModal,
+        setDeleteModalData : setDeleteModalData  
       }}
     >
       {children}
