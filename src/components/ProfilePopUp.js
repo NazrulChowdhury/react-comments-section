@@ -105,10 +105,14 @@ const ProfilePopUp = ({
           </div>         
         </div>
         <div style={{marginLeft : '10px', display:'flex', flexDirection:'column'}}>
-          <a href={userId && userId === otherUserId ? '/profile' : otherUserprofileUrl}>
+          <a 
+            href={userId && userId === otherUserId ? '/profile' : otherUserprofileUrl}
+            style = {{cursor:'default', textDecoration : 'none'}}
+            onClick = {(e) => {e.preventDefault()}}
+          >
             <span
               onClick = {(e) => goToProfile(e, otherUserId)}
-              style = {{textDecoration : 'none'}}
+              style = {{cursor:'pointer'}}
             >
               <b>{name}</b>
             </span>
