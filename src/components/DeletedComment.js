@@ -18,7 +18,7 @@ const DeletedComment = ({ type }) => { // type = comment | reply
           fontWeight: 'bold'
         }}
       >
-        {`${type} was deleted`}
+        {`deleted ${type}`}
       </div>
     </div>
   )

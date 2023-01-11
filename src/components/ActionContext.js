@@ -125,6 +125,7 @@ export const ActionProvider = ({
           createdAt : new Date(),
           justPosted : true // check LoadReply.js for explanation of this field. 
         }
+        parentId === targetCommentId ? newList[index].replies.unshift(replyObj) :
         newList[index].replies.push(replyObj)
         newList[index].replyCount++
         setComment(newList)
@@ -150,6 +151,7 @@ export const ActionProvider = ({
           createdAt : new Date(),
           justPosted : true // check LoadReply.js for explanation of this field. 
         }
+        parentId === targetCommentId ? newReplies.unshift(replyObj) :
         newReplies.push(replyObj)
         newList[index].replies = newReplies
         newList[index].replyCount++
