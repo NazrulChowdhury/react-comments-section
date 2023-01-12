@@ -7,7 +7,7 @@ import * as yup from "yup"
 
 const InputField = ({ 
   cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId, 
-  marginTop, marginRight, marginBottom
+  marginTop, marginRight, marginBottom, showRepliesCommentId, setShowRepliesCommentId
 }) => {
   const actions = useContext(ActionContext)
   const schema = yup.object({
@@ -33,6 +33,10 @@ const InputField = ({
   const onSubmit = (data) => {
     postForm(data)
     resetField("comment")
+    if(showRepliesCommentId){
+      const expanded = showRepliesCommentId.find(id => id === parentId)
+      !expanded && setShowRepliesCommentId([...showRepliesCommentId, parentId])
+    }
   }
  
   useEffect(() => { 

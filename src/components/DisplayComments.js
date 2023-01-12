@@ -21,7 +21,7 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
             type = 'comment' 
             key = {randomNum(10000, 1000000)}
           /> 
-        : // only render the rest if comment has not been deleted.
+        : // only render the rest if comment has not been deleted. showRepliesCommentId, setShowRepliesCommentId
         <div key={i.comId}>
           {actions.editArr.filter((id) => id === i.comId).length !== 0 ? (
             actions.customInput ? (
@@ -65,12 +65,14 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
               })
             ) : (
               <InputField 
-              cancellor={i.comId} 
-              parentId={i.comId} 
-              replyTargetName = {i.fullName} 
-              targetUserId = {i.userId}
-              targetCommentId = {i.comId}
-              marginRight = '5px'
+                cancellor={i.comId} 
+                parentId={i.comId} 
+                replyTargetName = {i.fullName} 
+                targetUserId = {i.userId}
+                targetCommentId = {i.comId}
+                marginRight = '5px'
+                showRepliesCommentId = {showRepliesCommentId}
+                setShowRepliesCommentId = {setShowRepliesCommentId}
               />
             ))}
 
@@ -143,6 +145,8 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
                         targetCommentId = {a.comId}
                         marginRight = '5px'
                         marginBottom = '5px'
+                        showRepliesCommentId = {showRepliesCommentId}
+                        setShowRepliesCommentId = {setShowRepliesCommentId}
                       />
                     ))}
                 </div>
