@@ -341,3 +341,12 @@ cursor: pointer; */
   text-decoration: underline;
   cursor: pointer;
 }
+.continue-btn{
+  color: gray;
+}
+.continue-btn:hover {
+  color : yellow;
+  background : teal;
+  border : none;
+  border-radius : 10px;
+}

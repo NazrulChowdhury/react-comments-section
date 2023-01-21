@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from '../Style.scss'
 import Popup from 'reactjs-popup'
 import { BsReply } from "react-icons/bs"
@@ -14,6 +14,11 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
   const edit = true
   const marginTop = actions.marginTop? actions.marginTop : '16px'
+  const [partialText, setPartialText] = useState('')
+
+  useEffect(()=>{
+    i.text.length > 20 && setPartialText(i.text.slice(0,20)) 
+  },[i.text])
 
   return (
     <div 
@@ -76,7 +81,23 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         </div>}
         <div style = {{marginTop : '10px'}}>
            {/* comment */}
-          {i.text}
+          { 
+            partialText ?(
+              <div>
+                {`${partialText} `} 
+                <button
+                  className={styles['continue-btn']}
+                  onClick={() => setPartialText('')}
+                >
+                  <span
+                    style={{marginLeft : '5px', marginRight : '5px'}}
+                  >
+                    Continue reading ...
+                  </span>
+                </button>
+              </div>
+            ) : i.text
+          }
           {/* buttons */}
           <div style={{display : 'flex', flexDirection: 'row',marginTop : '10px'}}>
             <div style={{display: 'flex', alignItems:'center' }}>
