@@ -9,6 +9,7 @@ const InputField = ({
   cancellor, parentId, child, value, edit, main, replyTargetName, targetUserId, targetCommentId, 
   marginTop, marginRight, marginBottom, showRepliesCommentId, setShowRepliesCommentId
 }) => {
+  const [tooLong, setTooLong] = useState(false)
   const actions = useContext(ActionContext)
   const schema = yup.object({
     comment: yup.string()
@@ -57,19 +58,40 @@ const InputField = ({
           alt='userIcon'
         /> 
       </div>
-      <input 
+      {/* <input 
         {...register("comment")} 
         className={styles.postComment}
-        placeholder='Type your reply here.'
-      />
-      {/* <textarea
-        className={styles.postComment}
-        //type='text'
-        placeholder='Type your reply here.'
-        //component='input'
-        value={text} 
-        // onChange={handleChange}
+        placeholder='Type your reply here.' 
+        onChange = {(e)=>{
+          if(e.target.value.length >= actions.commentLimit) {
+            !tooLong && setTooLong(true)
+          }else{
+            tooLong && setTooLong(false)
+          }
+        }}
+        style = {{
+          color : tooLong ? 'red' : null
+        }}
       /> */}
+       <textarea
+        {...register("comment")} 
+        className={styles.postComment}
+        //////type='text'
+        placeholder='Type your reply here.'
+        //////component='input'
+        //////value={text} 
+        /////// onChange={handleChange}
+        onChange = {(e)=>{
+          if(e.target.value.length >= actions.commentLimit) {
+            !tooLong && setTooLong(true)
+          }else{
+            tooLong && setTooLong(false)
+          }
+        }}
+        style = {{
+          color : tooLong ? 'red' : null
+        }}
+      /> 
       <div className={styles.inputActions}>
         <button
           className={styles.postBtn}
@@ -98,7 +120,13 @@ const InputField = ({
         )}
       </div>
     </form>
-    <p style={{marginLeft : '20px', color : 'red'}}>{errors.comment?.message}</p>
+    <p 
+      style={{marginLeft : '20px', color : 'red'}}
+    >
+      { tooLong &&
+        `maximum ${actions.commentLimit} characters allowed! Try creating a thread instead.`
+      } 
+    </p>
     </div>
   )
 }

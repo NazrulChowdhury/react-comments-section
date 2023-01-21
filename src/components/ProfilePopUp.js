@@ -131,8 +131,8 @@ const ProfilePopUp = ({
                   signInFunc()
                   return
                 }
-                const nameWithStar = name.replaceAll(' ', '*')
-                getFollowList(otherUserId , nameWithStar, 'following', followData.followers, followData.following)
+                const nameWithDash = name.replaceAll(' ', '-')
+                getFollowList(otherUserId , nameWithDash, 'following', followData.followers, followData.following)
               }}
             >
               <div >
@@ -148,8 +148,8 @@ const ProfilePopUp = ({
                   signInFunc()
                   return
                 }
-                const nameWithStar = name.replaceAll(' ', '*')
-                getFollowList(otherUserId , nameWithStar, 'followers', followData.followers, followData.following)
+                const nameWithDash = name.replaceAll(' ', '-')
+                getFollowList(otherUserId , nameWithDash, 'followers', followData.followers, followData.following)
               }}
             >
               <div>
