@@ -55,7 +55,10 @@ const ProfilePopUp = ({
             { following &&
               <button
                 className={styles.standardBtn}
-                style = {{ color : hover ? 'red' : 'teal'}}
+                style = {{ 
+                  color : hover ? 'red' : 'teal',
+                  backgroundColor: '#cdf7d3'
+                }}
                 onMouseEnter={handleMouseEnter} 
                 onMouseLeave={handleMouseLeave}
                 onClick = {(e) => {
