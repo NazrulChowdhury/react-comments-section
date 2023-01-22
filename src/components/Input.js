@@ -12,7 +12,10 @@ const Input = () => {
       submit: action.submit
     })
   ) : (
-    <InputField  main /> 
+    <InputField  
+      main 
+      isReply = {false}
+    /> 
   )
 }
 

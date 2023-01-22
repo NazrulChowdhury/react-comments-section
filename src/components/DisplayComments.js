@@ -40,6 +40,7 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
                   marginTop = '5px'
                   marginBottom = '5px'
                   marginRight = '5px'
+                  isReply = {true}
                 />
               )
           ) : ( 
@@ -73,6 +74,7 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
                 marginRight = '5px'
                 showRepliesCommentId = {showRepliesCommentId}
                 setShowRepliesCommentId = {setShowRepliesCommentId}
+                isReply = {true}
               />
             ))}
 
@@ -112,6 +114,7 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
                         targetCommentId = {a.comId}
                         marginRight = '5px'
                         marginBottom = '5px'
+                        isReply = {true}
                       />
                     )
                   ) : (
@@ -147,6 +150,7 @@ const DisplayComments = ({ comments, showReplyLoader, fetchReplies }) => {
                         marginBottom = '5px'
                         showRepliesCommentId = {showRepliesCommentId}
                         setShowRepliesCommentId = {setShowRepliesCommentId}
+                        isReply = {true}
                       />
                     ))}
                 </div>
