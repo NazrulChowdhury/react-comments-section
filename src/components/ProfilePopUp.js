@@ -91,13 +91,19 @@ const ProfilePopUp = ({
                     followingIds : [...userDocument.followingIds, otherUserId]
                   })                 
                   const updatedFollowUserData = followUserData.map(user =>{
-                    if(user.userId !== otherUserId){ 
-                      return user
+                    if(user.userId === otherUserId){ 
+                      return {
+                        ...user,
+                        followers : user.followers + 1
+                      }
                     }
-                    return {
-                      ...user,
-                      followers : user.followers + 1
+                    if(user.userId === userId){ 
+                      return {
+                        ...user,
+                        following : user.following + 1
+                      }
                     }
+                    return user
                   } )
                   setFollowUserData(updatedFollowUserData)
                 }}

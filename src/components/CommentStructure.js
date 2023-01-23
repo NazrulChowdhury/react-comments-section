@@ -17,7 +17,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const [partialText, setPartialText] = useState('')
 
   useEffect(()=>{
-    i.text.length > 20 && setPartialText(i.text.slice(0,20)) 
+    i.text.length > 350 && setPartialText(i.text.slice(0,350)) 
   },[i.text])
 
   return (
