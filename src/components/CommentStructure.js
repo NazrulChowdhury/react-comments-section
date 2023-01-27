@@ -118,8 +118,10 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
             </div>
             <div> {/* like Div */}
               <button
-                className={styles.customBtn}
-                style = {{cursor : 'pointer', marginRight : '10px'}}
+                style = {{
+                  cursor : 'pointer', marginRight : '10px',  background: 'transparent',
+                  display: 'flex', alignItems:'center'
+                }}
                 onClick={() => {
                   if(actions.userId && i.likersId.find(id => id == actions.userId)){
                     actions.unlikeTrigger(i.comId, parentId)
@@ -129,10 +131,13 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                 }}
               >
                 {' '}
-                {actions.userId && i.likersId.length && i.likersId.find(id => id == actions.userId)?
-                <span style={{marginTop : '3px'}}><AiFillHeart style={{color : 'red'}} size={20}/></span> :
-                <span style={{marginTop : '3px'}}><AiOutlineHeart size={20}/></span>
-                }             
+                <span 
+                  className={styles.heartBtn}
+                >
+                  {actions.userId && i.likersId.length && i.likersId.find(id => id == actions.userId)?
+                    <AiFillHeart style={{color : 'red'}} size={20}/> :<AiOutlineHeart size={20}/>
+                  }
+                </span>             
                 <span style={{fontSize : '10px'}}>{i.likeCount? i.likeCount : null}</span>
               </button>
             </div>
@@ -153,7 +158,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
           <Popup
             role='tooltip'
             trigger={
-              <button className={styles.customBtn}>
+              <button className={styles.optionBtn}>
                 {/* <FontAwesomeIcon icon={faEllipsisV} size='1x' color='#b9b9b9' /> */}
                 <CgEditUnmask size={20}/>
               </button>

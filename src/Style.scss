@@ -71,6 +71,7 @@
     // display: flex;
     background-color: rgb(243, 243, 243);
     padding: 8px;
+    padding-top: 15px;
     padding-bottom: 15px;
     border-radius: 20px;
     .userImg{
@@ -260,12 +261,41 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-.customBtn:hover {
-  border: 1px solid green !important;
+  padding-left: 5px;
+  padding-right: 5px;
   border-radius: 10px;
 }
-.dateBtn {
+.customBtn:hover {
+  // border: 1px solid green !important;
+  background: teal;
+  color: yellow;
+}
+.heartBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding : 2px;
+  border-radius: 50px;
+}
+.heartBtn:hover {
+  background: teal;
+  color: yellow;
+}
+.optionBtn{
+  background: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding:5px;
+  border-radius: 50px;
+}
+.optionBtn:hover{
+  background: teal;
+  color: yellow;
+}
+.dateBtn { 
   background: transparent;
   border: none !important;
 }
