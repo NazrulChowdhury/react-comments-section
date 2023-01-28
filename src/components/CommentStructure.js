@@ -142,7 +142,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               </button>
             </div>
             <div style={{display : 'flex', alignItems : 'center'}}>
-              <button className={styles.dateBtn} style={{color : 'gray', cursor:'default'}}>
+              <button className={styles.dateBtn} style={{color : 'gray', cursor:'default', fontSize:'12px'}}>
                 {toShortFormat(i.createdAt)}
               </button>
             </div>

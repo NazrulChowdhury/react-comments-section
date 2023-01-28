@@ -9,11 +9,9 @@ const ProfilePopUp = ({
   children
 }) => {
   const {
-    bucketUrl, signInFunc, handleFollow, getProfile, 
-    userDocument, setUserDocument,
-    onOpen, setFollowModalUserData, 
-    followUserData, setFollowUserData,
-    getFollowList, userId,
+    signInFunc, handleFollow, getProfile, 
+    userDocument, setUserDocument, setFollowModalUserData, 
+    followUserData, setFollowUserData, getFollowList, userId,
   } = useContext(ActionContext) 
   const [hover, setHover] = useState(false)
   const [following, setFollowing] = useState(undefined) // if you are following or not
@@ -68,7 +66,6 @@ const ProfilePopUp = ({
                     name ,
                     userId : otherUserId
                   })
-                  onOpen()
                 }}
               >
                 {hover ? `Unfollow` : 'Following' }

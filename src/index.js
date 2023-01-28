@@ -29,15 +29,14 @@ export const CommentSection = ({
   sectionLeft, // entire comment section. Adjust at will for individual comment 
   showReplyLoader,
   fetchReplies,
-  onOpen, // triggers custom modal to open
-  setFollowModalUserData,
+  setFollowModalUserData, // UnFollowFollowModalData
   getProfile,
   followUserData,
   setFollowUserData,
   getFollowList,
   relevantComments,
-  openDeleteModal,
-  setDeleteModalData 
+  openDeleteModal, // commentDeleteModal
+  setDeleteModalData // commentDeleteModal data
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -64,15 +63,14 @@ export const CommentSection = ({
       commentLimit = {commentLimit}
       bucketUrl = {bucketUrl}
       marginTop = {marginTop} // to create gap between two comments. not between replies.
-      onOpen = {onOpen}
-      setFollowModalUserData = {setFollowModalUserData}
+      setFollowModalUserData = {setFollowModalUserData} // deleteFollowModal data
       getProfile = {getProfile}
       followUserData = {followUserData} // user obj array with follower counts
       setFollowUserData = {setFollowUserData}
       getFollowList = {getFollowList}
       relevantComments = {relevantComments}
-      openDeleteModal = {openDeleteModal}
-      setDeleteModalData = {setDeleteModalData}
+      openDeleteModal = {openDeleteModal} 
+      setDeleteModalData = {setDeleteModalData} 
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
