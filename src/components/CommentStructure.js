@@ -8,7 +8,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { MdOutlineDeleteOutline } from "react-icons/md" 
 import { ActionContext } from './ActionContext'
 import { toShortFormat, getAvatarUrl } from '../functions'
-import ProfilePopUp from './ProfilePopUp'
+import AvatarLink from './AvatarLink'
 
 const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
@@ -29,28 +29,18 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         className={styles.userInfo}
         style={reply ? { marginLeft: 15, marginTop: '6px' } : {marginTop : '0px'}}
       >
-
-        <ProfilePopUp
-          otherUserId = {i.userId}
-          name = {i.fullName}
-          avatarUrl = {
-            getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum, actions.bucketUrl)
-          }
-        >
-          {/* avatar/Name/Button flex-row */}
-          <a 
-            href={actions.userId && actions.userId === i.userId ? '/profile' : 
-              `/userProfile/${i.userId}`
-            } 
-            className={styles.commentsTwo}
-            style = {{cursor: 'pointer', textDecoration : 'none'}}
+        <div style={{display:'flex', alignItems : 'center'}}>
+          <AvatarLink 
+            otherUserId={i.userId}
+            name={i.fullName}
+            avatarNum={i.avatarNum}
           >
             {/* avatar */}
             <img
               src = {
                 getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum, actions.bucketUrl)
               } 
-              style={{ width: 30, height: 30, borderRadius: 30 / 2 }}
+              style={{ width: 30, height: 30, borderRadius: 30 / 2, cursor: 'pointer' }}
               alt='userIcon'
               onError={(e) => {
                 e.target.onerror = null; // prevents looping
@@ -61,8 +51,14 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                 e.preventDefault()
                 actions.getProfile(i.userId, actions.userDocument)
               }}
-            />           
-              {/* fullName */}
+            /> 
+          </AvatarLink>          
+          {/* fullName */}
+          <AvatarLink
+            otherUserId={i.userId}
+            name={i.fullName}
+            avatarNum={i.avatarNum}
+          >
             <div 
               className={styles.fullName}
               onClick = {(e) => {
@@ -73,8 +69,8 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
             >
               {i.fullName} 
             </div>
-          </a>
-        </ProfilePopUp>
+          </AvatarLink>
+        </div>
         {replyTargetName && 
         <div style={{fontSize : '12px', color : 'gray', marginBottom : '5px'}}>
           replying to{<b>{' '+replyTargetName}</b>} 

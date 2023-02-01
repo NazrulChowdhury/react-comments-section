@@ -114,12 +114,13 @@
       flex-direction: column;
   
       .commentsTwo{
-        display: flex;
+        display: inline-block;
         margin-top: 8px;
   
         .fullName{
           display: flex;
           margin-left: 10px;
+          cursor: pointer;
         }
         .replyBtn{
           background-color: transparent;
