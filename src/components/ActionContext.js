@@ -30,7 +30,9 @@ export const ActionProvider = ({
   getFollowList,
   relevantComments,
   openDeleteModal,
-  setDeleteModalData  
+  setDeleteModalData,
+  useRating,
+  showStarRating  
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -246,7 +248,9 @@ export const ActionProvider = ({
         getFollowList : getFollowList,
         relevantComments : relevantComments,
         openDeleteModal : openDeleteModal,
-        setDeleteModalData : setDeleteModalData  
+        setDeleteModalData : setDeleteModalData,  
+        useRating : useRating,
+        showStarRating : showStarRating
       }}
     >
       {children}

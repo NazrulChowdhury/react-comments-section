@@ -12,6 +12,8 @@ import AvatarLink from './AvatarLink'
 
 const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
+  const { useRating, showStarRating} = actions
+  const {rate, setRate, renderRating} = useRating()
   const edit = true
   const marginTop = actions.marginTop? actions.marginTop : '16px'
   const [partialText, setPartialText] = useState('')
@@ -19,6 +21,10 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   useEffect(()=>{
     i.text.length > 350 && setPartialText(i.text.slice(0,350)) 
   },[i.text])
+
+  useEffect(() => {
+    i.rate && setRate(i.rate)
+  },[i])
 
   return (
     <div 
@@ -70,6 +76,14 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               {i.fullName} 
             </div>
           </AvatarLink>
+          {/* users book rating */}
+          {rate && showStarRating ?
+            <div style={{marginTop : '10px', marginLeft:'20px'}}> 
+              {renderRating} 
+            </div> 
+            :
+            null
+          }
         </div>
         {replyTargetName && 
         <div style={{fontSize : '12px', color : 'gray', marginBottom : '5px'}}>

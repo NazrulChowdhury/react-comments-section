@@ -36,7 +36,9 @@ export const CommentSection = ({
   getFollowList,
   relevantComments,
   openDeleteModal, // commentDeleteModal
-  setDeleteModalData // commentDeleteModal data
+  setDeleteModalData, // commentDeleteModal data
+  useRating,  // commenter rating of the book
+  showStarRating
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -71,6 +73,8 @@ export const CommentSection = ({
       relevantComments = {relevantComments}
       openDeleteModal = {openDeleteModal} 
       setDeleteModalData = {setDeleteModalData} 
+      useRating = {useRating}
+      showStarRating = {showStarRating}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>
