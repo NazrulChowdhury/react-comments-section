@@ -26,7 +26,6 @@ export const CommentSection = ({
   bucketUrl, // avatar image bucket address
   marginTop, // accommodate some margin-top for each comment if necessary 
   sectionTop,  // margin-top of the entire comment section. zero or 1px better for individual comment card.
-  sectionLeft, // entire comment section. Adjust at will for individual comment 
   showReplyLoader,
   fetchReplies,
   setFollowModalUserData, // UnFollowFollowModalData
@@ -82,7 +81,7 @@ export const CommentSection = ({
         </div>
         <div 
           className={styles.displayComments}
-          style = {{marginTop : sectionTop || '18px', marginLeft : sectionLeft || '38px'}}
+          style = {{marginTop : sectionTop || '18px'}}
         >
           <DisplayComments 
             comments={comments} 
