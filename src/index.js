@@ -37,7 +37,8 @@ export const CommentSection = ({
   openDeleteModal, // commentDeleteModal
   setDeleteModalData, // commentDeleteModal data
   useRating,  // commenter rating of the book
-  showStarRating
+  showStarRating,
+  replyFormLeftMargin // adds margin left to the reply form
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -74,6 +75,7 @@ export const CommentSection = ({
       setDeleteModalData = {setDeleteModalData} 
       useRating = {useRating}
       showStarRating = {showStarRating}
+      replyFormLeftMargin={replyFormLeftMargin}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>

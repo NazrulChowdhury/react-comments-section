@@ -17,7 +17,7 @@ const InputField = ({
     .max(actions.commentLimit,`maximum ${actions.commentLimit} characters allowed! Try creating a thread instead.`)
     .required()
   }) 
-  const marginLeft = !child && !edit && main === undefined?  36 : 0 
+  const marginLeft = !child && !edit && main === undefined && actions.replyFormLeftMargin ?  actions.replyFormLeftMargin : 0 
   const [text, setText] = useState('')
 
   const { register, resetField, handleSubmit, formState:{ errors } } = useForm({

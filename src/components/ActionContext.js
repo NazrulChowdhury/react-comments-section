@@ -32,7 +32,8 @@ export const ActionProvider = ({
   openDeleteModal,
   setDeleteModalData,
   useRating,
-  showStarRating  
+  showStarRating,
+  replyFormLeftMargin  
 }) => {
   const [replies, setReplies] = useState([])
   const [user, setUser] = useState('')
@@ -250,7 +251,8 @@ export const ActionProvider = ({
         openDeleteModal : openDeleteModal,
         setDeleteModalData : setDeleteModalData,  
         useRating : useRating,
-        showStarRating : showStarRating
+        showStarRating : showStarRating,
+        replyFormLeftMargin : replyFormLeftMargin
       }}
     >
       {children}
