@@ -74,11 +74,11 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
               }}
             >
               {i.fullName} 
-            </div>
+            </div>            
           </AvatarLink>
           {/* users book rating */}
           {rate && showStarRating ?
-            <div style={{marginTop : '10px', marginLeft:'20px'}}> 
+            <div className={styles.ratingLargeScreen}> 
               {renderRating} 
             </div> 
             :
@@ -89,6 +89,14 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
         <div style={{fontSize : '12px', color : 'gray', marginBottom : '5px'}}>
           replying to{<b>{' '+replyTargetName}</b>} 
         </div>}
+        {/* users book rating vertical mobile only*/}
+        {rate && showStarRating ?
+            <div className={styles.ratingSmallScreen}> 
+              {renderRating} 
+            </div> 
+          :
+          null
+        }
         <div style = {{marginTop : '10px'}}>
            {/* comment */}
           { 
