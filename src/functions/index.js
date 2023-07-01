@@ -16,16 +16,29 @@ export const toShortFormat = (date) => {
 
 }
 
+// export const getAvatarUrl = (
+//   appUserID, AppUserImg, commentUserId, commentUserAvatarNum, bucketUrl
+//   ) => {
+//   if(appUserID && appUserID === commentUserId){
+//     const url = AppUserImg ? AppUserImg : `${bucketUrl}/noImage.png`
+//     return url
+//   }
+//   const url = commentUserAvatarNum ? `${bucketUrl}/${commentUserId}.jpeg?${commentUserAvatarNum}`
+//   : `${bucketUrl}/noImage.png`
+//   return url
+// }
+export const getAvatarUrlWithAvatarNum = (userId, avatarNum, bucketUrl ) => {
+  return `${bucketUrl}/${userId}.jpeg?avatarNum=${avatarNum}`
+}
+
 export const getAvatarUrl = (
   appUserID, AppUserImg, commentUserId, commentUserAvatarNum, bucketUrl
-  ) => {
-  if(appUserID && appUserID === commentUserId){
-    const url = AppUserImg ? AppUserImg : `${bucketUrl}/noImage.png`
-    return url
+)   => {
+  if(appUserID && appUserID === commentUserId){ // logged in users avatar url
+    return AppUserImg 
   }
-  const url = commentUserAvatarNum ? `${bucketUrl}/${commentUserId}.jpeg?${commentUserAvatarNum}`
-  : `${bucketUrl}/noImage.png`
-  return url
+  // other users avatar url
+ return commentUserAvatarNum ? getAvatarUrlWithAvatarNum(commentUserId, commentUserAvatarNum,bucketUrl): undefined
 }
 
 export const randomNum = (min, max)=> {

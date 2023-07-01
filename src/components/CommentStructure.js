@@ -12,7 +12,7 @@ import AvatarLink from './AvatarLink'
 
 const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
   const actions = useContext(ActionContext)
-  const { useRating, showStarRating} = actions
+  const { useRating, showStarRating, Avatar} = actions
   const {rate, setRate, renderRating} = useRating()
   const edit = true
   const marginTop = actions.marginTop? actions.marginTop : '16px'
@@ -41,8 +41,18 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
             name={i.fullName}
             avatarNum={i.avatarNum}
           >
-            {/* avatar */}
-            <img
+            {/* avatar */} 
+            <Avatar
+              bg='teal.500'
+              src={getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum, actions.bucketUrl)}
+              style = {{cursor: 'pointer'}}
+              onClick = {(e) => {
+                e.stopPropagation()
+                e.preventDefault()
+                actions.getProfile(i.userId, actions.userDocument)
+              }}
+            />
+            {/* <img
               src = {
                 getAvatarUrl(actions.userId, actions.userImg, i.userId, i.avatarNum, actions.bucketUrl)
               } 
@@ -57,7 +67,7 @@ const CommentStructure = ({ i, reply, parentId, replyTargetName}) => {
                 e.preventDefault()
                 actions.getProfile(i.userId, actions.userDocument)
               }}
-            /> 
+            />  */}
           </AvatarLink>          
           {/* fullName */}
           <AvatarLink

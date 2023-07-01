@@ -11,7 +11,7 @@ const ProfilePopUp = ({
   const {
     signInFunc, handleFollow, getProfile, 
     userDocument, setUserDocument, setFollowModalUserData, 
-    followUserData, setFollowUserData, getFollowList, userId,
+    followUserData, setFollowUserData, getFollowList, userId, Avatar
   } = useContext(ActionContext) 
   const [hover, setHover] = useState(false)
   const [following, setFollowing] = useState(undefined) // if you are following or not
@@ -42,12 +42,18 @@ const ProfilePopUp = ({
       <div className = {styles.tooltipProfile} >
         <div style={{display:'flex', justifyContent : 'space-between', alignItems:'center'}}>
           <a href={userId && userId === otherUserId ? '/profile' : otherUserprofileUrl}>
-            <img
+            <Avatar
+              bg='teal.500'
+              src = {avatarUrl}
+              style={{cursor:'pointer', marginLeft:'10px', marginTop : '5px' }}
+              onClick = {(e) => goToProfile(e, otherUserId)}
+            />
+            {/* <img
               src = {avatarUrl}
               style={{ width: 60, height: 60, borderRadius: 60 / 2, cursor:'pointer', marginLeft:'10px', marginTop : '5px' }}
               alt='userIcon'
               onClick = {(e) => goToProfile(e, otherUserId)}
-            />
+            /> */}
           </a>
           <div style={{marginRight : '15px'}}> 
             { following &&

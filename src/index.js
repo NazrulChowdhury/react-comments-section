@@ -38,7 +38,8 @@ export const CommentSection = ({
   setDeleteModalData, // commentDeleteModal data
   useRating,  // commenter rating of the book
   showStarRating,
-  replyFormLeftMargin // adds margin left to the reply form
+  replyFormLeftMargin, // adds margin left to the reply form
+  Avatar, // chakra ui avatar component
 }) => {
   const [comments, setComments] = useState(commentsArray)
   useEffect(() => {
@@ -76,6 +77,7 @@ export const CommentSection = ({
       useRating = {useRating}
       showStarRating = {showStarRating}
       replyFormLeftMargin={replyFormLeftMargin}
+      Avatar = {Avatar}
     >
       <div className={styles.section}>
         <div className={styles.inputBox}>

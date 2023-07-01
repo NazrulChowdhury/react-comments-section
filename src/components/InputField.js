@@ -11,6 +11,9 @@ const InputField = ({
 }) => {
   const [tooLong, setTooLong] = useState(false)
   const actions = useContext(ActionContext)
+  const { Avatar} = actions
+  const [text, setText] = useState('')
+
   const schema = yup.object({
     comment: yup.string()
     .min(1, 'cannot submit empty!')
@@ -18,7 +21,7 @@ const InputField = ({
     .required()
   }) 
   const marginLeft = !child && !edit && main === undefined && actions.replyFormLeftMargin ?  actions.replyFormLeftMargin : 0 
-  const [text, setText] = useState('')
+  
 
   const { register, resetField, handleSubmit, formState:{ errors } } = useForm({
     resolver: yupResolver(schema),
@@ -26,6 +29,7 @@ const InputField = ({
       "comment" : edit? (value) : null
     }
   })
+
   const postForm = (data) => {
     edit === true
     ? actions.submit(cancellor, data.comment, parentId, true, setText, null, targetCommentId)
@@ -53,11 +57,15 @@ const InputField = ({
     >
       <div style={{display:'flex'}}>
         <div className={styles.userImg}>
-          <img
+          <Avatar
+            bg='teal.500'
+            src = {actions.userImg}
+          />
+          {/* <img
             src = {actions.userImg ? actions.userImg : `${actions.bucketUrl}/noImage.png`} 
             style={{ width: 38, height: 38, borderRadius: 38 / 2 }}
             alt='userIcon'
-          /> 
+          />  */}
         </div>
         <textarea
           {...register("comment")} 
