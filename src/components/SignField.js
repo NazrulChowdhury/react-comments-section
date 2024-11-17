@@ -18,7 +18,7 @@ const SignField = () => {
     <div style={{display : 'flex', justifyContent : 'center'}}>
       <div className={styles.signBox}> 
         <div className={styles.signLine}>
-          Log in or sign up to leave a comment
+          Log in to leave a comment
         </div>
         <div>
           <button
@@ -28,13 +28,13 @@ const SignField = () => {
           >
             Log In
           </button>
-          <button
+          {/* <button
             className={styles.signBtn}
             name='signup'
             onClick={(e) => handleDivClick(e)}
           >
             Sign Up
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

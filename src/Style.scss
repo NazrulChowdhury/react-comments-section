@@ -244,12 +244,17 @@
     font-weight:bolder;
     margin-right: 10px;
     font-size: 16px;
+    &:hover {
+      background-color: #006666; // Darker shade for hover effect
+      color: yellow; // Ensuring text is still visible
+      cursor: pointer; // Changes cursor to pointer on hover
+    }
     &:active{
       outline: none;
       border:none;
     }
-
   }
+  
   .signBtn{
     border : 2px solid teal;
     border-radius: 8px;
