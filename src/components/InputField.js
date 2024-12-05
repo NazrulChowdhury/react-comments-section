@@ -29,7 +29,11 @@ const InputField = ({
       "comment" : edit? (value) : null
     }
   })
-
+  // validator error tracker
+  // useEffect(() => {
+  //   console.log(errors); // To see if any validation errors occur
+  // }, [errors]);
+  
   const postForm = (data) => {
     edit === true
     ? actions.submit(cancellor, data.comment, parentId, true, setText, null, targetCommentId)
