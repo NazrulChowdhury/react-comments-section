@@ -41,13 +41,6 @@ const ProfilePopUp = ({
     setFollowData(followUserData.find(user => {return user.userId === otherUserId}))
   },[followUserData])
 
-    // Use `useEffect` to log only in the browser
-    useEffect(() => {
-      console.log('ownProfile -----------------------', ownProfile);
-      console.log('userId -------------', userId);
-      console.log('otherUserId-----------', otherUserId);
-    }, [ownProfile, userId, otherUserId]); // Logs when these dependencies change
-
   return (
     <div className = {styles.tooltip}>
       {children}
