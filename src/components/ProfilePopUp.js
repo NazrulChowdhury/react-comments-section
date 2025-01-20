@@ -8,17 +8,22 @@ const ProfilePopUp = ({
   name,
   children
 }) => {
+
   const {
     signInFunc, handleFollow, getProfile, 
     userDocument, setUserDocument, setFollowModalUserData, 
     followUserData, setFollowUserData, getFollowList, userId, Avatar
   } = useContext(ActionContext) 
+
   const [hover, setHover] = useState(false)
   const [following, setFollowing] = useState(undefined) // if you are following or not
   const [followData, setFollowData] = useState(undefined) // following and followers count
   const otherUserprofileUrl = `/userProfile/${otherUserId}`
   const  handleMouseEnter = ()=> setHover(true)
   const handleMouseLeave = () => setHover(false)
+
+  const ownProfile = userId && userId === otherUserId
+
   const goToProfile = (e, userId) => {
     e.stopPropagation()
     e.preventDefault()
@@ -41,7 +46,7 @@ const ProfilePopUp = ({
       {children}
       <div className = {styles.tooltipProfile} >
         <div style={{display:'flex', justifyContent : 'space-between', alignItems:'center'}}>
-          <a href={userId && userId === otherUserId ? '/profile' : otherUserprofileUrl}>
+          <a href={ ownProfile ? '/profile' : otherUserprofileUrl}>
             <Avatar
               bg='teal.500'
               src = {avatarUrl}
@@ -56,7 +61,7 @@ const ProfilePopUp = ({
             /> */}
           </a>
           <div style={{marginRight : '15px'}}> 
-            { following &&
+            { following && !ownProfile &&
               <button
                 className={styles.standardBtn}
                 style = {{ 
@@ -78,7 +83,7 @@ const ProfilePopUp = ({
               </button>
             }
           
-            { !following &&
+            { !following && !ownProfile &&
               <button
                 className={styles.standardBtn}
                 onClick = {(e) => {
