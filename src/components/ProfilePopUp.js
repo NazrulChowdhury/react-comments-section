@@ -24,6 +24,10 @@ const ProfilePopUp = ({
 
   const ownProfile = userId && userId === otherUserId
 
+  console.log('ownProfile -----------------------', ownProfile)
+  console.log('userId -------------', userId)
+  console.log('otherUserId-----------', otherUserId)
+
   const goToProfile = (e, userId) => {
     e.stopPropagation()
     e.preventDefault()
